@@ -1,9 +1,12 @@
 import Vue from "vue";
+import "./plugins/axios";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import fastclick from "fastclick";
 
 Vue.config.productionTip = false;
+fastclick.attach(document.body);
 
 new Vue({
   router,
