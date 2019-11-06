@@ -1,29 +1,49 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <!-- header -->
+    <Header />
+    <!-- content -->
+    <section>
+      <transition name="fade">
+        <keep-alive>
+          <router-view />
+        </keep-alive>
+      </transition>
+    </section>
+    <!-- footer -->
+    <Footer />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script type="text/javascript">
+import Header from "components/header.vue";
+import Footer from "components/footer.vue";
+
+export default {
+  props: [],
+  components: {
+    Header,
+    Footer
   }
+};
+</script>
+
+<style lang="scss">
+@import "./style/common";
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.8s;
+}
+.fade-enter,
+.fade-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+section {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 100px;
 }
 </style>

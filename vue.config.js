@@ -90,7 +90,8 @@ module.exports = {
       .set("@", resolve("src"))
       .set("assets", resolve("src/assets"))
       .set("public", resolve("src/public"))
-      .set("plugins", resolve("src/plugins"));
+      .set("plugins", resolve("src/plugins"))
+      .set("components", resolve("src/components"));
 
     if (isProd) {
       // 删除懒加载模块

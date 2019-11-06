@@ -1,8 +1,8 @@
 <!-- HTML -->
 <template>
-  <header>
-    /*header*/
-  </header>
+  <div>
+    /*content*/
+  </div>
 </template>
 
 <!-- JS -->
@@ -25,17 +25,4 @@ export default {
 <!-- SCSS -->
 <style lang="scss" scoped>
 //@import 'src/style/mixin.scss';
-
-header {
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100px;
-  font-size: 32px;
-  position: fixed;
-  line-height: 100px;
-  text-align: center;
-  background-color: #fb7299;
-}
 </style>
