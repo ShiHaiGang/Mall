@@ -109,3 +109,36 @@ html,body{
 .animation_opactiy{
     animation: backOpacity 2s ease-in-out infinite;
 }
+
+.line_ellipsis_1,
+.word_ellipsis_2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line_ellipsis_1 {
+  -webkit-line-clamp: 1;
+  /* word-break:break-all; */
+}
+
+.word_ellipsis_1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.word_ellipsis_2 {
+  -webkit-line-clamp: 2;
+  word-break: break-word;
+}
+
+.word_ellipsis_3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

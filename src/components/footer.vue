@@ -51,7 +51,7 @@ footer {
   position: fixed;
   height: 100px;
   background-color: #fff;
-  border-top: 1px solid #ccc;
+  border-top: 0.5px solid #ccc;
   padding: 15px 0 10px 0;
 }
 

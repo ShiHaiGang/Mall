@@ -3,7 +3,7 @@
     <!-- header -->
     <Header />
     <!-- content -->
-    <section>
+    <section class="center">
       <!-- <transition name="fade"> -->
       <keep-alive>
         <router-view />
@@ -39,11 +39,12 @@ export default {
 .fade-leave-to {
   transform: translate3d(100%, 0, 0);
 }
-section {
+.center {
   position: fixed;
   top: 100px;
   left: 0;
   right: 0;
   bottom: 100px;
+  overflow: hidden;
 }
 </style>
