@@ -4,11 +4,11 @@
     <Header />
     <!-- content -->
     <section class="center">
-      <!-- <transition name="fade"> -->
-      <keep-alive>
-        <router-view />
-      </keep-alive>
-      <!-- </transition> -->
+      <transition name="fade">
+        <keep-alive>
+          <router-view />
+        </keep-alive>
+      </transition>
     </section>
     <!-- footer -->
     <Footer />
@@ -33,10 +33,10 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.3s;
+  transition: all 0.2s linear;
 }
 .fade-enter,
-.fade-leave-to {
+.fade-leave-active {
   transform: translate3d(100%, 0, 0);
 }
 .center {

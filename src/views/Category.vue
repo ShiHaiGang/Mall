@@ -5,20 +5,26 @@
     <Scroll class="wrapper nav_container" :data="goods">
       <ul class="content">
         <li
-          class="active"
           v-for="(item, index) in goods"
           :key="index"
           @click="selectMenu(index, $event)"
+          :class="{ active: currentIndex === index }"
         >
-          <i class="icon-bar"></i>
           <span class="word-ellipsis-1">{{ item.typeName }}</span>
         </li>
       </ul>
     </Scroll>
     <!-- 右边商品 -->
-    <Scroll class="wrapper category_main" :data="goods">
+    <Scroll
+      class="wrapper category_main"
+      :probeType="3"
+      :data="goods"
+      :listenScroll="true"
+      @scroll="_scroll"
+      ref="wrapperList"
+    >
       <ul class="content">
-        <li v-for="(items, i) in goods" :key="i">
+        <li v-for="(items, i) in goods" :key="i" class="scroll_top_hook">
           <h5>{{ items.typeName }}</h5>
           <section>
             <div v-for="(item, j) in items.categoryLogicVOList" :key="j">
@@ -58,6 +64,51 @@ export default {
               name: "Q版手办",
               img:
                 "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "Q版手办",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
             }
           ]
         },
@@ -66,6 +117,36 @@ export default {
           categoryLogicVOList: [
             {
               name: "魔力赏",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "潮元素",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "潮元素",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "潮元素",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "潮元素",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "潮元素",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
+            },
+            {
+              name: "潮元素",
               img:
                 "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
             },
@@ -98,6 +179,36 @@ export default {
               name: "寿屋拼装",
               img:
                 "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
+            },
+            {
+              name: "寿屋拼装",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
+            },
+            {
+              name: "寿屋拼装",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
+            },
+            {
+              name: "寿屋拼装",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
+            },
+            {
+              name: "寿屋拼装",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
+            },
+            {
+              name: "寿屋拼装",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
+            },
+            {
+              name: "寿屋拼装",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
             }
           ]
         },
@@ -118,20 +229,125 @@ export default {
               name: "服饰鞋靴",
               img:
                 "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
+            },
+            {
+              name: "服饰鞋靴",
+              img:
+                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
             }
           ]
         }
       ],
-      listHeight: []
+      listHeight: [],
+      scrollY: 0
     };
   },
   props: [],
   watch: {},
   methods: {
-    selectMenu(index, event) {}
+    // 左边 选择跳转到对应的位置
+    selectMenu(index, event) {
+      if (!event._constructed) {
+        return;
+      }
+      let wrapperList = this.$refs.wrapperList.$el.getElementsByClassName(
+        "scroll_top_hook"
+      );
+      let el = wrapperList[index];
+      this.$refs.wrapperList.scrollToElement(el, 300);
+    },
+    // 获取 DOM 计算右边的高度
+    _calculateHeight() {
+      let wrapperList = this.$refs.wrapperList.$el.getElementsByClassName(
+        "scroll_top_hook"
+      );
+      let height = 0;
+      this.listHeight.push(height);
+      for (let i = 0; i < wrapperList.length; i++) {
+        let item = wrapperList[i];
+        height += item.clientHeight;
+        this.listHeight.push(height);
+      }
+    },
+    _scroll(pos) {
+      this.scrollY = Math.abs(Math.round(pos.y));
+    }
   },
-  computed: {},
-  mounted() {},
+  computed: {
+    // 计算选中的位置
+    currentIndex() {
+      for (let i = 0; i < this.listHeight.length; i++) {
+        let height1 = this.listHeight[i];
+        let height2 = this.listHeight[i + 1];
+        if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+          return i;
+        }
+      }
+      return 0;
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.$nextTick(() => {
+        this._calculateHeight();
+      });
+    }, 2000);
+  },
   components: { Scroll }
 };
 </script>
@@ -140,12 +356,9 @@ export default {
 <style lang="scss" scoped>
 //@import 'src/style/mixin.scss';
 .category {
-  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
 }
 .nav_container {
   width: 184px;
@@ -159,19 +372,25 @@ export default {
       line-height: 100px;
       font-size: 28px;
       color: #212121;
-      i {
-        position: absolute;
-        top: 36px;
-        left: 24px;
-        width: 4px;
-        height: 28px;
-        background: #fb7299;
-        border-radius: 1px;
-      }
+      position: relative;
       span {
         display: block;
         margin: 0 4px 0 44px;
       }
+    }
+    .active {
+      background-color: #fff;
+    }
+    .active::before {
+      position: absolute;
+      display: block;
+      content: "";
+      top: 36px;
+      left: 24px;
+      width: 4px;
+      height: 28px;
+      background: #fb7299;
+      border-radius: 1px;
     }
   }
 }
@@ -188,12 +407,15 @@ export default {
   }
   section {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     margin-bottom: 8%;
     & > div {
-      flex: 1;
+      // flex: 1;
+      float: left;
+      width: (100%/3);
     }
     img {
       width: 156px;
@@ -207,10 +429,5 @@ export default {
       color: #999;
     }
   }
-}
-.active {
-  position: relative;
-  background-color: #fff;
-  color: #fb7299;
 }
 </style>
