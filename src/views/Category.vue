@@ -324,6 +324,7 @@ export default {
         this.listHeight.push(height);
       }
     },
+    // 监听 scroll 事件
     _scroll(pos) {
       this.scrollY = Math.abs(Math.round(pos.y));
     }
