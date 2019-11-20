@@ -25,10 +25,10 @@
         </div>
         <div class="info_container">
           <div class="desc_container">
-            <p class="desc word_ellipsis_2">
+            <p class="desc ellipsis_2">
               GSC VOCALOID 初音未来 Memorial Dress Ver. 手办 附独家特典
             </p>
-            <p class="brief line_ellipsis_1">
+            <p class="brief ellipsis_1">
               从今往后，向着更高点。MIKU绝美原画华丽登场~！附独家特典：原画亚克力牌
             </p>
           </div>

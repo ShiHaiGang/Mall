@@ -10,7 +10,7 @@
           @click="selectMenu(index, $event)"
           :class="{ active: currentIndex === index }"
         >
-          <span class="word-ellipsis-1">{{ item.typeName }}</span>
+          <span class="ellipsis_1">{{ item.typeName }}</span>
         </li>
       </ul>
     </Scroll>
@@ -29,7 +29,7 @@
           <section>
             <div v-for="(item, j) in items.categoryLogicVOList" :key="j">
               <img :src="item.img" alt="" />
-              <p class="word-ellipsis-2">{{ item.name }}</p>
+              <p class="ellipsis_2">{{ item.name }}</p>
             </div>
           </section>
         </li>

@@ -1,6 +1,6 @@
 <!-- HTML -->
 <template>
-  <footer>
+  <footer class="border_top_1px">
     <!-- eslint-disable -->
     <router-link class='tab-item' :to="{path: 'home', query: $route.query}">
       <span :id="$route.path.indexOf('home') !== -1? 'home_active' : 'home'"></span>
@@ -47,12 +47,11 @@ footer {
   bottom: 0;
   z-index: 1;
   width: 100%;
+  height: 100px;
   display: flex;
   position: fixed;
-  height: 100px;
+  padding-top: 14px;
   background-color: #fff;
-  border-top: 0.5px solid #ccc;
-  padding: 15px 0 10px 0;
 }
 
 .tab-item {
@@ -64,7 +63,7 @@ footer {
 
 .tab-item > span {
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 10px;
   width: 44px;
   height: 44px;
 }

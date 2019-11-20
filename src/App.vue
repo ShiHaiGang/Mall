@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./style/common";
+@import "./style/index";
 
 .fade-enter-active,
 .fade-leave-active {
@@ -46,5 +46,6 @@ export default {
   right: 0;
   bottom: 100px;
   overflow: hidden;
+  background-color: #f4f4f4;
 }
 </style>
