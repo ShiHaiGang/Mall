@@ -40,9 +40,8 @@ module.exports = {
     open: true,
     port: 8080,
     proxy: {
-      // '/api': 'http://localhost:3000'
       "/api": {
-        target: "http://localhost:3000",
+        target: "https://mall.bilibili.com/mall-c-search/home",
         pathRewrite: { "^/api": "" }
       }
     },

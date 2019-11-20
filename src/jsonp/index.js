@@ -1,0 +1,16 @@
+import axios from "./axios";
+
+/**
+ * BaseApi.post 支持的配置
+ * @param {string} url url
+ * @param {object} body 请求参数
+ */
+export default {
+  //首页
+  index(params) {
+    return axios.get({
+      url: `/index`,
+      body: params
+    });
+  }
+};

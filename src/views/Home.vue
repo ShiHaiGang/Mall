@@ -19,24 +19,35 @@
       </li>
     </ul>
     <ol>
-      <li>
+      <li v-for="(item, index) in feeds" :key="index">
         <div class="img_container">
           <img src="../assets/xiaojie.png" alt="" />
+          <!-- <img
+            v-if="item.imageUrls"
+            :src="
+              item.imageUrls[0].includes('https')
+                ? item.imageUrls[0]
+                : 'https' + item.imageUrls[0]
+            "
+            alt=""
+          /> -->
         </div>
         <div class="info_container">
           <div class="desc_container">
             <p class="desc ellipsis_2">
-              GSC VOCALOID 初音未来 Memorial Dress Ver. 手办 附独家特典
+              {{ item.title }}
             </p>
             <p class="brief ellipsis_1">
-              从今往后，向着更高点。MIKU绝美原画华丽登场~！附独家特典：原画亚克力牌
+              {{ item.brief }}
             </p>
           </div>
           <p class="price">
-            <span class="symbol">¥</span>
-            <span class="number">2439</span>
+            <span class="symbol">{{ item.priceSymbol }}</span>
+            <span v-if="item.priceDesc" class="number">{{
+              item.priceDesc[0]
+            }}</span>
           </p>
-          <p class="like">6.6万人想要</p>
+          <p class="like">{{ item.like }}人想要</p>
         </div>
       </li>
     </ol>
@@ -45,17 +56,44 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
+import JSONP from "@/jsonp";
 
 export default {
   data() {
-    return {};
+    return {
+      feeds: []
+    };
   },
   props: [],
   watch: {},
-  methods: {},
+  methods: {
+    index() {
+      JSONP.index({
+        network: "",
+        mobi_app: "iphone",
+        openEvent: "cold",
+        build: 0,
+        pageNum: 1,
+        pageSize: 10,
+        mVersion: 7
+      })
+        .then(res => {
+          const { code, data } = res.data;
+          const { feeds } = data.vo;
+          if (code === 0) {
+            this.feeds = feeds.list;
+            this.total = feeds.total;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
   computed: {},
-  mounted() {},
+  mounted() {
+    this.index();
+  },
   components: {}
 };
 </script>
@@ -95,7 +133,6 @@ ol {
       width: 284px;
       height: 284px;
       margin: 10px 0 0 10px;
-      background-color: rgb(51, 135, 214);
       img {
         width: 100%;
         height: 100%;
