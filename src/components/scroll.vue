@@ -1,9 +1,13 @@
+<!-- HTML -->
 <template>
-  <div ref="wrapper">
-    <slot></slot>
+  <div class="wrapper" ref="wrapper">
+    <section class="content">
+      <slot></slot>
+    </section>
   </div>
 </template>
 
+<!-- JS -->
 <script type="text/javascript">
 import BScroll from "better-scroll";
 export default {
@@ -92,6 +96,7 @@ export default {
         click: this.click,
         scrollX: this.scrollX
       });
+      console.log(this.scroll);
       // 是否派发滚动事件
       if (this.listenScroll) {
         this.scroll.on("scroll", pos => {
@@ -154,3 +159,11 @@ export default {
   }
 };
 </script>
+
+<!-- SCSS -->
+<style lang="scss" scoped>
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+</style>

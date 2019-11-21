@@ -1,3 +1,4 @@
+<!-- HTML -->
 <template>
   <div id="app">
     <!-- header -->
@@ -15,6 +16,7 @@
   </div>
 </template>
 
+<!-- JS -->
 <script type="text/javascript">
 import Header from "components/header.vue";
 import Footer from "components/footer.vue";
@@ -28,6 +30,7 @@ export default {
 };
 </script>
 
+<!-- SCSS -->
 <style lang="scss">
 @import "./style/index";
 
@@ -46,6 +49,7 @@ export default {
   right: 0;
   bottom: 100px;
   overflow: hidden;
+  overflow-y: scroll;
   background-color: #f4f4f4;
 }
 </style>

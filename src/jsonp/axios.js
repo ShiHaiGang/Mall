@@ -1,6 +1,6 @@
 import axios from "axios";
 
-var BaseUrl = "http://localhost:8080/api";
+var BaseUrl = "http://192.168.0.105:8080/api" || "http://localhost:8080/api";
 
 export default {
   get(param = {}) {

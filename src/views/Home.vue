@@ -1,5 +1,6 @@
+<!-- HTML -->
 <template>
-  <div>
+  <Scroll>
     <ul>
       <li>
         <img src="../assets/shouban@3x.png" alt="手办模玩" />
@@ -47,15 +48,20 @@
               item.priceDesc[0]
             }}</span>
           </p>
-          <p class="like">{{ item.like }}人想要</p>
+          <p class="like">
+            {{
+              item.like > 1e4 ? `${(item.like / 1e4).toFixed(1)}万` : item.like
+            }}人想要
+          </p>
         </div>
       </li>
     </ol>
-  </div>
+  </Scroll>
 </template>
 
-<script>
-// @ is an alias to /src
+<!-- JS -->
+<script type="text/javascript">
+import Scroll from "components/scroll";
 import JSONP from "@/jsonp";
 
 export default {
@@ -94,9 +100,11 @@ export default {
   mounted() {
     this.index();
   },
-  components: {}
+  components: { Scroll }
 };
 </script>
+
+<!-- SCSS -->
 <style lang="scss" scoped>
 ul {
   display: flex;

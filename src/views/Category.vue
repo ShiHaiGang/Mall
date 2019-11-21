@@ -2,39 +2,42 @@
 <template>
   <div class="category">
     <!-- 左边list -->
-    <Scroll class="wrapper nav_container" :data="goods">
-      <ul class="content">
-        <li
-          v-for="(item, index) in goods"
-          :key="index"
-          @click="selectMenu(index, $event)"
-          :class="{ active: currentIndex === index }"
-        >
-          <span class="ellipsis_1">{{ item.typeName }}</span>
-        </li>
-      </ul>
-    </Scroll>
+    <nav>
+      <Scroll :data="goods">
+        <ul>
+          <li
+            v-for="(item, index) in goods"
+            :key="index"
+            @click="selectMenu(index, $event)"
+            :class="{ active: currentIndex === index }"
+          >
+            <span class="ellipsis_1">{{ item.typeName }}</span>
+          </li>
+        </ul>
+      </Scroll>
+    </nav>
     <!-- 右边商品 -->
-    <Scroll
-      class="wrapper category_main"
-      :probeType="3"
-      :data="goods"
-      :listenScroll="true"
-      @scroll="_scroll"
-      ref="wrapperList"
-    >
-      <ul class="content">
-        <li v-for="(items, i) in goods" :key="i" class="scroll_top_hook">
-          <h5>{{ items.typeName }}</h5>
-          <section>
-            <div v-for="(item, j) in items.categoryLogicVOList" :key="j">
-              <img :src="item.img" alt="" />
-              <p class="ellipsis_2">{{ item.name }}</p>
-            </div>
-          </section>
-        </li>
-      </ul>
-    </Scroll>
+    <menu>
+      <Scroll
+        :probeType="3"
+        :data="goods"
+        :listenScroll="true"
+        @scroll="onScroll"
+        ref="wrapperList"
+      >
+        <ul>
+          <li v-for="(items, i) in goods" :key="i" class="scroll_top_hook">
+            <h5>{{ items.typeName }}</h5>
+            <section>
+              <div v-for="(item, j) in items.categoryLogicVOList" :key="j">
+                <img :src="item.img" alt="" />
+                <p class="ellipsis_2">{{ item.name }}</p>
+              </div>
+            </section>
+          </li>
+        </ul>
+      </Scroll>
+    </menu>
   </div>
 </template>
 
@@ -325,7 +328,7 @@ export default {
       }
     },
     // 监听 scroll 事件
-    _scroll(pos) {
+    onScroll(pos) {
       this.scrollY = Math.abs(Math.round(pos.y));
     }
   },
@@ -347,7 +350,7 @@ export default {
       this.$nextTick(() => {
         this._calculateHeight();
       });
-    }, 2000);
+    }, 20);
   },
   components: { Scroll }
 };
@@ -361,7 +364,7 @@ export default {
   height: 100%;
   display: flex;
 }
-.nav_container {
+nav {
   width: 184px;
   overflow: hidden;
   overflow-y: scroll;
@@ -395,7 +398,7 @@ export default {
     }
   }
 }
-.category_main {
+menu {
   flex: 1;
   padding: 0 24px;
   overflow: hidden;
