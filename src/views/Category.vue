@@ -30,7 +30,11 @@
             <h5>{{ items.typeName }}</h5>
             <section>
               <div v-for="(item, j) in items.categoryLogicVOList" :key="j">
-                <img :src="item.img" alt="" />
+                <div class="img_container">
+                  <!-- 此处图片地址 403 -->
+                  <img v-if="false" :src="item.img" alt="" />
+                  <img v-else src="../assets/1.png" alt="" />
+                </div>
                 <p class="ellipsis_2">{{ item.name }}</p>
               </div>
             </section>
@@ -43,259 +47,13 @@
 
 <!-- JS -->
 <script type="text/javascript">
-//import index from '@/index';
 import Scroll from "components/scroll";
+import JSONP from "@/jsonp";
 
 export default {
   data() {
     return {
-      goods: [
-        {
-          typeName: "手办",
-          categoryLogicVOList: [
-            {
-              name: "比例手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/05/19/05191533c31dae2ada51c580349fb2c2.png@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "Q版手办",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            }
-          ]
-        },
-        {
-          typeName: "扭蛋潮玩",
-          categoryLogicVOList: [
-            {
-              name: "魔力赏",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "潮元素",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "潮元素",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "潮元素",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "潮元素",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "潮元素",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "潮元素",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "潮元素",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            },
-            {
-              name: "潮元素",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/db/5c/db5c448fce0288db6bc67d6ab9e0838f.jpg@.jpg"
-            }
-          ]
-        },
-        {
-          typeName: "模型",
-          categoryLogicVOList: [
-            {
-              name: "高达拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/6a/e5/6ae51554b4ab7c999d0153c23a221c52.png@.jpg"
-            },
-            {
-              name: "寿屋拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
-            },
-            {
-              name: "寿屋拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
-            },
-            {
-              name: "寿屋拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
-            },
-            {
-              name: "寿屋拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
-            },
-            {
-              name: "寿屋拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
-            },
-            {
-              name: "寿屋拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
-            },
-            {
-              name: "寿屋拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
-            },
-            {
-              name: "寿屋拼装",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/68/56/68564da1f98c49bf37db5359e9b0f3da.png@.jpg"
-            }
-          ]
-        },
-        {
-          typeName: "周边",
-          categoryLogicVOList: [
-            {
-              name: "节日礼品",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/72/61/7261e629d80982d9aa5a20d74c523409.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            },
-            {
-              name: "服饰鞋靴",
-              img:
-                "https://i0.hdslb.com/bfs/mall/mall/0e/a8/0ea865a702506fddb223329b91f948d4.jpg@.jpg"
-            }
-          ]
-        }
-      ],
+      goods: [],
       listHeight: [],
       scrollY: 0
     };
@@ -315,7 +73,7 @@ export default {
       this.$refs.wrapperList.scrollToElement(el, 300);
     },
     // 获取 DOM 计算右边的高度
-    _calculateHeight() {
+    calculateHeight() {
       let wrapperList = this.$refs.wrapperList.$el.getElementsByClassName(
         "scroll_top_hook"
       );
@@ -330,6 +88,25 @@ export default {
     // 监听 scroll 事件
     onScroll(pos) {
       this.scrollY = Math.abs(Math.round(pos.y));
+    },
+    // 接口数据
+    category() {
+      JSONP.category({
+        shopId: 2233
+      })
+        .then(res => {
+          const { code, data } = res.data;
+          if (code === 0) {
+            this.goods = data.vo;
+            // 从新计算高度
+            this.$nextTick(() => {
+              this.calculateHeight();
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   computed: {
@@ -346,11 +123,13 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.$nextTick(() => {
-        this._calculateHeight();
-      });
-    }, 20);
+    this.category();
+    // 模拟方法
+    // setTimeout(() => {
+    //   this.$nextTick(() => {
+    //     this.calculateHeight();
+    //   });
+    // }, 20);
   },
   components: { Scroll }
 };
@@ -359,6 +138,7 @@ export default {
 <!-- SCSS -->
 <style lang="scss" scoped>
 //@import 'src/style/mixin.scss';
+
 .category {
   width: 100%;
   height: 100%;
@@ -412,24 +192,29 @@ menu {
   section {
     width: 100%;
     overflow: hidden;
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    margin-bottom: 8%;
     & > div {
-      // flex: 1;
       float: left;
       width: (100%/3);
     }
-    img {
-      width: 156px;
+    .img_container {
+      position: relative;
+      padding-top: 100%;
+      overflow: hidden;
       height: 156px;
+    }
+    img {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
     p {
       margin: 12px 0;
       text-align: center;
       font-size: 24px;
-      line-height: 28px;
+      height: 56px;
       color: #999;
     }
   }

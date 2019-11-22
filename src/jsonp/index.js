@@ -12,5 +12,12 @@ export default {
       url: `/index`,
       body: params
     });
+  },
+  //分类
+  category(params) {
+    return axios.get({
+      url: `/category/listV2`,
+      body: params
+    });
   }
 };

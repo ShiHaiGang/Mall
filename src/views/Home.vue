@@ -106,6 +106,8 @@ export default {
 
 <!-- SCSS -->
 <style lang="scss" scoped>
+//@import 'src/style/mixin.scss';
+
 ul {
   display: flex;
   height: 160px;
