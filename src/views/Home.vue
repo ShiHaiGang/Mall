@@ -1,29 +1,39 @@
 <!-- HTML -->
 <template>
-  <Scroll>
-    <ul>
-      <li>
-        <img src="../assets/shouban@3x.png" alt="手办模玩" />
-        <p>手办模玩</p>
-      </li>
-      <li>
-        <img src="../assets/manzhan@3x.png" alt="漫展购票" />
-        <p>漫展购票</p>
-      </li>
-      <li>
-        <img src="../assets/xinpin@3x.png" alt="新品上架" />
-        <p>新品上架</p>
-      </li>
-      <li>
-        <img src="../assets/shangpin@3x.png" alt="商品分类" />
-        <p>商品分类</p>
-      </li>
-    </ul>
-    <ol>
-      <li v-for="(item, index) in feeds" :key="index">
-        <div class="img_container">
-          <img src="../assets/xiaojie.png" alt="" />
-          <!-- <img
+  <div class="home">
+    <Scroll
+      ref="wscroll"
+      :data="feeds"
+      :listenScroll="true"
+      @scroll="onScroll"
+      :pullup="true"
+      @pullup="onPullup"
+      :pulldown="true"
+      @pulldown="onPulldown"
+    >
+      <ul>
+        <li>
+          <img src="../assets/shouban@3x.png" alt="手办模玩" />
+          <p>手办模玩</p>
+        </li>
+        <li>
+          <img src="../assets/manzhan@3x.png" alt="漫展购票" />
+          <p>漫展购票</p>
+        </li>
+        <li>
+          <img src="../assets/xinpin@3x.png" alt="新品上架" />
+          <p>新品上架</p>
+        </li>
+        <li>
+          <img src="../assets/shangpin@3x.png" alt="商品分类" />
+          <p>商品分类</p>
+        </li>
+      </ul>
+      <ol>
+        <li v-for="(item, index) in feeds" :key="index">
+          <div class="img_container">
+            <img src="../assets/xiaojie.png" alt="" />
+            <!-- <img
             v-if="item.imageUrls"
             :src="
               item.imageUrls[0].includes('https')
@@ -32,31 +42,35 @@
             "
             alt=""
           /> -->
-        </div>
-        <div class="info_container">
-          <div class="desc_container">
-            <p class="desc ellipsis_2">
-              {{ item.title }}
+          </div>
+          <div class="info_container">
+            <div class="desc_container">
+              <p class="desc ellipsis_2">
+                {{ item.title }}
+              </p>
+              <p class="brief ellipsis_1">
+                {{ item.brief }}
+              </p>
+            </div>
+            <p class="price">
+              <span class="symbol">{{ item.priceSymbol }}</span>
+              <span v-if="item.priceDesc" class="number">{{
+                item.priceDesc[0]
+              }}</span>
             </p>
-            <p class="brief ellipsis_1">
-              {{ item.brief }}
+            <p class="like">
+              {{
+                item.like > 1e4
+                  ? `${(item.like / 1e4).toFixed(1)}万`
+                  : item.like
+              }}人想要
             </p>
           </div>
-          <p class="price">
-            <span class="symbol">{{ item.priceSymbol }}</span>
-            <span v-if="item.priceDesc" class="number">{{
-              item.priceDesc[0]
-            }}</span>
-          </p>
-          <p class="like">
-            {{
-              item.like > 1e4 ? `${(item.like / 1e4).toFixed(1)}万` : item.like
-            }}人想要
-          </p>
-        </div>
-      </li>
-    </ol>
-  </Scroll>
+        </li>
+      </ol>
+    </Scroll>
+    <div class="back_top" @click="backTop"></div>
+  </div>
 </template>
 
 <!-- JS -->
@@ -67,7 +81,9 @@ import JSONP from "@/jsonp";
 export default {
   data() {
     return {
-      feeds: []
+      feeds: [],
+      pageNum: 1,
+      scrollY: 0
     };
   },
   props: [],
@@ -79,7 +95,7 @@ export default {
         mobi_app: "iphone",
         openEvent: "cold",
         build: 0,
-        pageNum: 1,
+        pageNum: this.pageNum,
         pageSize: 10,
         mVersion: 7
       })
@@ -87,6 +103,7 @@ export default {
           const { code, data } = res.data;
           const { feeds } = data.vo;
           if (code === 0) {
+            this.pageNum++;
             this.feeds = feeds.list;
             this.total = feeds.total;
           }
@@ -94,6 +111,22 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    onScroll(pos) {
+      // this.scrollY = Math.abs(Math.round(pos.y));
+      this.scrollY = Math.round(pos.y);
+      // console.log(this.scrollY);
+    },
+    onPullup() {
+      this.index();
+      console.log("pullup", "加载下一页");
+    },
+    onPulldown() {
+      console.log("pulldown");
+    },
+    backTop() {
+      // this.$refs.wscroll.scrollTo(0, 0, 800);
+      this.$refs.wscroll.autoPullDownRefresh();
     }
   },
   computed: {},
@@ -108,6 +141,10 @@ export default {
 <style lang="scss" scoped>
 //@import 'src/style/mixin.scss';
 
+.home {
+  width: 100%;
+  height: 100%;
+}
 ul {
   display: flex;
   height: 160px;
@@ -197,5 +234,15 @@ ol {
       }
     }
   }
+}
+.back_top {
+  position: fixed;
+  bottom: 150px;
+  right: 30px;
+  width: 80px;
+  height: 80px;
+  background-color: red;
+  border-radius: 100%;
+  z-index: 2;
 }
 </style>

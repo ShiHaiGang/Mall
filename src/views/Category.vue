@@ -21,7 +21,7 @@
       <Scroll
         :probeType="3"
         :data="goods"
-        :listenScroll="true"
+        :scroll="true"
         @scroll="onScroll"
         ref="wrapperList"
       >
@@ -214,7 +214,7 @@ menu {
       margin: 12px 0;
       text-align: center;
       font-size: 24px;
-      height: 56px;
+      height: 50px;
       color: #999;
     }
   }
