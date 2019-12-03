@@ -32,16 +32,8 @@
       <ol>
         <li v-for="(item, index) in feeds" :key="index">
           <div class="img_container">
-            <img src="../assets/xiaojie.png" alt="" />
-            <!-- <img
-            v-if="item.imageUrls"
-            :src="
-              item.imageUrls[0].includes('https')
-                ? item.imageUrls[0]
-                : 'https' + item.imageUrls[0]
-            "
-            alt=""
-          /> -->
+            <!-- <img src="../assets/xiaojie.png" alt="" /> -->
+            <img v-if="item.imageUrls" :src="item.imageUrls[0]" alt="" />
           </div>
           <div class="info_container">
             <div class="desc_container">
@@ -171,7 +163,7 @@ ol {
     position: relative;
     display: flex;
     width: 100%;
-    height: 300px;
+    height: 304px;
     margin-bottom: 24px;
     border-radius: 16px;
     background-color: #fff;
@@ -179,7 +171,11 @@ ol {
     .img_container {
       width: 284px;
       height: 284px;
+      border-radius: 8px;
       margin: 10px 0 0 10px;
+      overflow: hidden;
+      background: #eee url(../assets/picture_loading.svg) no-repeat 50%;
+      background-size: 80px;
       img {
         width: 100%;
         height: 100%;

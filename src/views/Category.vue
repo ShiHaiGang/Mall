@@ -31,9 +31,8 @@
             <section>
               <div v-for="(item, j) in items.categoryLogicVOList" :key="j">
                 <div class="img_container">
-                  <!-- 此处图片地址 403 -->
-                  <img v-if="false" :src="item.img" alt="" />
-                  <img v-else src="../assets/1.png" alt="" />
+                  <!-- <img src="../assets/1.png" alt="" /> -->
+                  <img :src="item.img" alt="" />
                 </div>
                 <p class="ellipsis_2">{{ item.name }}</p>
               </div>
@@ -194,13 +193,18 @@ menu {
     overflow: hidden;
     & > div {
       float: left;
-      width: (100%/3);
+      width: 30.33%;
+      &:nth-child(3n-1) {
+        margin: 0 (100-30.33)/3 + px;
+      }
     }
     .img_container {
       position: relative;
       padding-top: 100%;
       overflow: hidden;
       height: 156px;
+      background: #eee url(../assets/picture_loading.svg) no-repeat 50%;
+      background-size: 80px;
     }
     img {
       position: absolute;
