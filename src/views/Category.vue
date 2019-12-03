@@ -21,7 +21,7 @@
       <Scroll
         :probeType="3"
         :data="goods"
-        :scroll="true"
+        :listenScroll="true"
         @scroll="onScroll"
         ref="wrapperList"
       >
