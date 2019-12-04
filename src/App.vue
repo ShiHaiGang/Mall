@@ -44,10 +44,10 @@ export default {
 }
 .center {
   position: fixed;
-  top: 100px;
+  top: 50px;
   left: 0;
   right: 0;
-  bottom: 100px;
+  bottom: 50px;
   overflow: hidden;
   overflow-y: scroll;
   background-color: #f4f4f4;

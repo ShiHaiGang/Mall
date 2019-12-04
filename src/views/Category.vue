@@ -144,21 +144,21 @@ export default {
   display: flex;
 }
 nav {
-  width: 184px;
+  width: 92px;
   overflow: hidden;
   overflow-y: scroll;
   background-color: #f4f4f4;
   ul {
     width: 100%;
     li {
-      height: 100px;
-      line-height: 100px;
-      font-size: 28px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 14px;
       color: #212121;
       position: relative;
       span {
         display: block;
-        margin: 0 4px 0 44px;
+        margin: 0 2px 0 22px;
       }
     }
     .active {
@@ -168,10 +168,10 @@ nav {
       position: absolute;
       display: block;
       content: "";
-      top: 36px;
-      left: 24px;
-      width: 4px;
-      height: 28px;
+      top: 18px;
+      left: 12px;
+      width: 2px;
+      height: 14px;
       background: #fb7299;
       border-radius: 1px;
     }
@@ -179,32 +179,37 @@ nav {
 }
 menu {
   flex: 1;
-  padding: 0 24px;
+  padding: 0 12px;
   overflow: hidden;
   overflow-y: scroll;
   background-color: #fff;
   h5 {
-    font-size: 28px;
-    line-height: 24px;
-    padding: 36px 0;
+    font-size: 14px;
+    line-height: 12px;
+    padding: 18px 0;
   }
   section {
-    width: 100%;
-    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
     & > div {
-      float: left;
       width: 30.33%;
-      &:nth-child(3n-1) {
-        margin: 0 (100-30.33)/3 + px;
-      }
     }
+    // & > div {
+    //   float: left;
+    //   width: 30.33%;
+    //   &:nth-child(3n-1) {
+    //     margin: 0 (100-30.33)/3 + px;
+    //   }
+    // }
     .img_container {
       position: relative;
       padding-top: 100%;
       overflow: hidden;
-      height: 156px;
+      height: 78px;
       background: #eee url(../assets/picture_loading.svg) no-repeat 50%;
-      background-size: 80px;
+      background-size: 40px;
     }
     img {
       position: absolute;
@@ -215,10 +220,10 @@ menu {
       height: 100%;
     }
     p {
-      margin: 12px 0;
+      margin: 6px 0;
       text-align: center;
-      font-size: 24px;
-      height: 50px;
+      font-size: 12px;
+      height: 25px;
       color: #999;
     }
   }

@@ -47,10 +47,10 @@ footer {
   bottom: 0;
   z-index: 1;
   width: 100%;
-  height: 100px;
+  height: 50px;
   display: flex;
   position: fixed;
-  padding-top: 14px;
+  padding-top: 7px;
   background-color: #fff;
 }
 
@@ -58,14 +58,14 @@ footer {
   flex: 1;
   display: block;
   text-align: center;
-  font-size: 20px;
+  font-size: 10px;
 }
 
 .tab-item > span {
   display: block;
-  margin: 0 auto 10px;
-  width: 44px;
-  height: 44px;
+  margin: 0 auto 5px;
+  width: 22px;
+  height: 22px;
 }
 
 #home_active,

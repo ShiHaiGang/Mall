@@ -139,43 +139,43 @@ export default {
 }
 ul {
   display: flex;
-  height: 160px;
-  padding: 0 40px;
-  margin: 30px auto 40px;
+  height: 80px;
+  padding: 0 20px;
+  margin: 15px auto 20px;
   li {
     flex: 1;
-    height: 160px;
+    height: 80px;
     img {
-      width: 144px;
-      height: 144px;
+      width: 72px;
+      height: 72px;
       display: block;
       margin: 0 auto;
     }
     p {
       text-align: center;
-      font-size: 24px;
+      font-size: 12px;
     }
   }
 }
 ol {
-  padding: 0 24px;
+  padding: 0 12px;
   li {
     position: relative;
     display: flex;
     width: 100%;
-    height: 304px;
-    margin-bottom: 24px;
-    border-radius: 16px;
+    height: 152px;
+    margin-bottom: 12px;
+    border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     .img_container {
-      width: 284px;
-      height: 284px;
-      border-radius: 8px;
-      margin: 10px 0 0 10px;
+      width: 142px;
+      height: 142px;
+      border-radius: 4px;
+      margin: 5px 0 0 5px;
       overflow: hidden;
       background: #eee url(../assets/picture_loading.svg) no-repeat 50%;
-      background-size: 80px;
+      background-size: 40px;
       img {
         width: 100%;
         height: 100%;
@@ -186,57 +186,57 @@ ol {
       box-sizing: border-box;
       flex: 1;
       height: 100%;
-      padding-top: 26px;
+      padding-top: 13px;
       .desc_container {
         position: relative;
         margin: 0 11px 0 8px;
       }
       .desc {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         font-family: PingFangSC;
-        font-size: 32px;
-        line-height: 44px;
+        font-size: 16px;
+        line-height: 22px;
       }
       .brief {
-        height: 24px;
-        font-size: 24px;
+        height: 12px;
+        font-size: 12px;
         color: #999;
-        line-height: 24px;
+        line-height: 12px;
       }
       .price {
         position: absolute;
-        bottom: 24px;
-        left: 16px;
-        height: 36px;
+        bottom: 12px;
+        left: 8px;
+        height: 18px;
         font-size: 0;
-        line-height: 36px;
+        line-height: 18px;
         letter-spacing: 0;
       }
       .symbol {
         color: #ff5687;
-        font-size: 28px;
+        font-size: 14px;
       }
       .number {
         color: #ff5687;
-        font-size: 36px;
+        font-size: 18px;
       }
       .like {
         position: absolute;
-        bottom: 24px;
-        right: 20px;
-        font-size: 24px;
+        bottom: 12px;
+        right: 10px;
+        font-size: 12px;
         color: #999;
-        line-height: 24px;
+        line-height: 12px;
       }
     }
   }
 }
 .back_top {
   position: fixed;
-  bottom: 150px;
-  right: 30px;
-  width: 80px;
-  height: 80px;
+  bottom: 75px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
   background-color: red;
   border-radius: 100%;
   z-index: 2;

@@ -51,36 +51,36 @@ header {
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 100px;
-  font-size: 32px;
-  line-height: 100px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
   background-color: #fb7299;
   color: #fff;
   display: flex;
-  padding: 0 20px;
+  padding: 0 10px;
   font-weight: bold;
   align-items: center;
   justify-content: center;
   i {
     display: block;
-    width: 56px;
-    height: 56px;
+    width: 28px;
+    height: 28px;
     background-color: yellow;
   }
   div {
     flex: 1;
-    height: 60px;
-    margin: 0 20px;
+    height: 30px;
+    margin: 0 10px;
     position: relative;
-    padding: 0 30px 0 60px;
-    border-radius: 50px;
+    padding: 0 15px 0 30px;
+    border-radius: 25px;
     background-color: #fff;
     .icon_search {
       position: absolute;
-      top: (60-32)/2 + px;
-      left: 20px;
-      width: 32px;
-      height: 32px;
+      top: (30-16)/2 + px;
+      left: 10px;
+      width: 16px;
+      height: 16px;
       background: url(../assets/search.png) no-repeat;
       background-size: 100%;
     }
