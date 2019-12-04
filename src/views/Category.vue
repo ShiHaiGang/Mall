@@ -1,7 +1,7 @@
 <!-- HTML -->
 <template>
   <div class="category">
-    <!-- 左边list -->
+    <!-- 左边分类 -->
     <nav>
       <Scroll :data="goods">
         <ul>

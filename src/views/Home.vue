@@ -11,6 +11,7 @@
       :pulldown="true"
       @pulldown="onPulldown"
     >
+      <!-- 头部分类 -->
       <ul>
         <li>
           <img src="../assets/shouban@3x.png" alt="手办模玩" />
@@ -29,6 +30,7 @@
           <p>商品分类</p>
         </li>
       </ul>
+      <!-- 商品列表 -->
       <ol>
         <li v-for="(item, index) in feeds" :key="index">
           <div class="img_container">
@@ -61,6 +63,7 @@
         </li>
       </ol>
     </Scroll>
+    <!-- 回到顶部 -->
     <div class="back_top" @click="backTop"></div>
   </div>
 </template>
