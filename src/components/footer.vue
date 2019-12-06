@@ -18,6 +18,7 @@
       <span :id="$route.path.indexOf('order') !== -1? 'order_active' : 'order'"></span>
       订单
     </router-link>
+    <!-- eslint-enable -->
   </footer>
 </template>
 

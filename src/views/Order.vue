@@ -20,7 +20,6 @@
     <!-- tab 滚动展示层 -->
     <Scroll
       class="tab_wrapper"
-      :content="false"
       :probeType="3"
       :listenScroll="true"
       @scroll="onScroll"
@@ -54,8 +53,11 @@ export default {
     scrollY(newY, oldY) {
       // 预留头部高度
       let headerHeight = 50;
+      // 提高20px的圆角
+      let borderTopRadius = 20;
       // Math.max() 函数返回一组数中的最大值
-      let maxY = Math.max(-this.navHeight + headerHeight, newY);
+      /* eslint-disable-next-line */
+      let maxY = Math.max(-this.navHeight + headerHeight + borderTopRadius, newY);
       this.maxY = `translate3d(0, ${maxY}px, 0)`;
       // 使用 v-bind:style, Vue.js 会自动侦测并添加相应的前缀。
       // this.$refs.layer.style["transform"] = `translate3d(0, ${maxY}px, 0)`;
@@ -190,11 +192,13 @@ menu {
 }
 .bg_layer {
   position: relative;
-  // top: -20;
-  // border-top-left-radius: 20px;
-  // border-top-right-radius: 20px;
   height: 100%;
   background: #f4f4f4;
+  // background: #34d3d8ce;
+  // 添加圆角效果
+  top: -20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .tab_wrapper {
   position: fixed;
