@@ -2,7 +2,7 @@
 <template>
   <div id="app">
     <!-- header -->
-    <Header />
+    <!-- <Header /> -->
     <!-- content -->
     <section class="center">
       <transition name="fade">
@@ -44,7 +44,8 @@ export default {
 }
 .center {
   position: fixed;
-  top: 50px;
+  // top: 50px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 50px;

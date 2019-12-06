@@ -37,7 +37,7 @@ module.exports = {
   productionSourceMap: build.productionSourceMap,
   lintOnSave: isProd, // 关闭开发 eslint 报错
   devServer: {
-    open: true,
+    open: false,
     port: 8080,
     proxy: {
       "/api": {
