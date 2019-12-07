@@ -8,7 +8,7 @@
     ></nav>
     <!-- tab 滚动展示层 -->
     <Scroll
-      class="tab_wrapper"
+      class="wrapper"
       :probeType="3"
       :listenScroll="true"
       @scroll="onScroll"
@@ -151,7 +151,7 @@ nav {
     background-color: rgba(0, 0, 0, 0.5);
   }
 }
-.tab_wrapper {
+.wrapper {
   position: absolute;
   top: 50px;
   bottom: 0;

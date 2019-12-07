@@ -2,7 +2,8 @@
 <template>
   <div class="home">
     <Scroll
-      ref="wscroll"
+      ref="wrapper"
+      :probeType="2"
       :data="feeds"
       :listenScroll="true"
       @scroll="onScroll"
@@ -64,13 +65,14 @@
       </ol>
     </Scroll>
     <!-- 回到顶部 -->
-    <div class="back_top" @click="backTop"></div>
+    <BackTop @click.native="backTop" v-show="scrollY" />
   </div>
 </template>
 
 <!-- JS -->
 <script type="text/javascript">
 import Scroll from "components/scroll";
+import BackTop from "components/backTop";
 import JSONP from "@/jsonp";
 
 export default {
@@ -78,7 +80,7 @@ export default {
     return {
       feeds: [],
       pageNum: 1,
-      scrollY: 0
+      scrollY: false
     };
   },
   props: [],
@@ -108,9 +110,7 @@ export default {
         });
     },
     onScroll(pos) {
-      // this.scrollY = Math.abs(Math.round(pos.y));
-      this.scrollY = Math.round(pos.y);
-      // console.log(this.scrollY);
+      this.scrollY = Math.abs(Math.round(pos.y)) > 500;
     },
     onPullup() {
       this.index();
@@ -120,15 +120,15 @@ export default {
       console.log("pulldown");
     },
     backTop() {
-      // this.$refs.wscroll.scrollTo(0, 0, 800);
-      this.$refs.wscroll.autoPullDownRefresh();
+      this.$refs.wrapper.scrollTo(0, 0, 500);
+      // this.$refs.wrapper.autoPullDownRefresh();
     }
   },
   computed: {},
   mounted() {
     this.index();
   },
-  components: { Scroll }
+  components: { Scroll, BackTop }
 };
 </script>
 
@@ -139,6 +139,7 @@ export default {
 .home {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 ul {
   display: flex;
@@ -233,15 +234,5 @@ ol {
       }
     }
   }
-}
-.back_top {
-  position: fixed;
-  bottom: 75px;
-  right: 15px;
-  width: 40px;
-  height: 40px;
-  background-color: red;
-  border-radius: 100%;
-  z-index: 2;
 }
 </style>

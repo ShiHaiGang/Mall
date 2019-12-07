@@ -23,7 +23,7 @@
         :data="goods"
         :listenScroll="true"
         @scroll="onScroll"
-        ref="wrapperList"
+        ref="wrapper"
       >
         <ul>
           <li v-for="(items, i) in goods" :key="i" class="scroll_top_hook">
@@ -65,21 +65,21 @@ export default {
       if (!event._constructed) {
         return;
       }
-      let wrapperList = this.$refs.wrapperList.$el.getElementsByClassName(
+      let wrapper = this.$refs.wrapper.$el.getElementsByClassName(
         "scroll_top_hook"
       );
-      let el = wrapperList[index];
-      this.$refs.wrapperList.scrollToElement(el, 300);
+      let el = wrapper[index];
+      this.$refs.wrapper.scrollToElement(el, 300);
     },
     // 获取 DOM 计算右边的高度
     calculateHeight() {
-      let wrapperList = this.$refs.wrapperList.$el.getElementsByClassName(
+      let wrapper = this.$refs.wrapper.$el.getElementsByClassName(
         "scroll_top_hook"
       );
       let height = 0;
       this.listHeight.push(height);
-      for (let i = 0; i < wrapperList.length; i++) {
-        let item = wrapperList[i];
+      for (let i = 0; i < wrapper.length; i++) {
+        let item = wrapper[i];
         height += item.clientHeight;
         this.listHeight.push(height);
       }
@@ -142,11 +142,11 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
+  overflow: hidden;
 }
 nav {
   width: 92px;
   overflow: hidden;
-  overflow-y: scroll;
   background-color: #f4f4f4;
   ul {
     width: 100%;
@@ -181,7 +181,6 @@ menu {
   flex: 1;
   padding: 0 12px;
   overflow: hidden;
-  overflow-y: scroll;
   background-color: #fff;
   h5 {
     font-size: 14px;
