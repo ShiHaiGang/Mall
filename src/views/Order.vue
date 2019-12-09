@@ -7,16 +7,7 @@
       :style="{ backgroundImage: image, transform: maxYScale, zIndex: layer }"
     ></nav>
     <!-- Tab bar 吸顶效果 -->
-    <hgroup v-show="tabBar" class="fixed border_bottom_1px">
-      <h6
-        v-for="(item, index) in tabArr"
-        :key="index"
-        :class="{ active: item.state }"
-        @click="active(item)"
-      >
-        {{ item.title }}
-      </h6>
-    </hgroup>
+    <TabBar class="fixed" :data="tabArr" :show="tabBar" @active="active" />
     <!-- Tab 滚动展示层 -->
     <Scroll
       class="wrapper"
@@ -39,16 +30,7 @@
         </ul>
       </menu>
       <!-- Tab bar -->
-      <hgroup class="border_bottom_1px">
-        <h6
-          v-for="(item, index) in tabArr"
-          :key="index"
-          :class="{ active: item.state }"
-          @click="active(item)"
-        >
-          {{ item.title }}
-        </h6>
-      </hgroup>
+      <TabBar :data="tabArr" @active="active" />
       <!-- 订单中心 -->
       <ol class="use_tab">
         <!-- 数据列表 -->
@@ -64,6 +46,7 @@
 <!-- JS -->
 <script type="text/javascript">
 import Scroll from "components/scroll";
+import TabBar from "components/tabBar";
 
 // 预留头部高度
 const headerHeight = 50;
@@ -77,11 +60,8 @@ export default {
       scrollY: 0,
       maxYScale: 0,
       tabBar: false,
-      tabArr: [
-        { title: "待付款", state: true },
-        { title: "待收货", state: false },
-        { title: "待评价", state: false }
-      ]
+      tabArr: [{ title: "待付款" }, { title: "待收货" }, { title: "待评价" }],
+      currentIndex: 0
     };
   },
   props: [],
@@ -103,11 +83,9 @@ export default {
     }
   },
   methods: {
-    active(item) {
-      this.tabArr.forEach(e => {
-        e.state = false;
-      });
-      item.state = true;
+    active(index) {
+      console.log(index);
+      // this.currentIndex = index;
     },
     // 监听 scroll 事件
     onScroll(pos) {
@@ -133,7 +111,7 @@ export default {
       this.navHeight = this.$refs.nav.clientHeight;
     });
   },
-  components: { Scroll }
+  components: { TabBar, Scroll }
 };
 </script>
 
