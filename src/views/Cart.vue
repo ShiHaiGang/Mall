@@ -134,11 +134,7 @@ export default {
       }
 
       //全部选中则全选点亮，相反
-      var checkAllFlags = true;
-      this.productList.forEach((item, index) => {
-        checkAllFlags = checkAllFlags && item.checked;
-      });
-      this.checkAllFlag = checkAllFlags;
+      this.checkAllFlag = !this.productList.find(item => !item.checked);
 
       //计算总金额
       this.calTotalMoney();
