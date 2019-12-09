@@ -7,7 +7,7 @@
       <div class="shop_list">
         <h5>昆山仓</h5>
         <ul>
-          <li v-for="(item, index) in productList" :key="index">
+          <li class="item" v-for="(item, index) in productList" :key="index">
             <!-- 选择区 -->
             <div
               @click="selectProduct(item)"
@@ -41,6 +41,15 @@
                 </div>
               </div>
             </div>
+            <!-- 收藏删除 -->
+            <div class="hide">
+              <div @click="hideCollect(item)" class="button action_fav">
+                <span>移至收藏</span>
+              </div>
+              <div @click="hideDelete(index)" class="button action_delete">
+                <span>删除</span>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -66,7 +75,7 @@
 
 <!-- JS -->
 <script type="text/javascript">
-//import index from '@/index';
+import "@/plugins/hammer.js";
 
 export default {
   data() {
@@ -104,6 +113,40 @@ export default {
   props: [],
   watch: {},
   methods: {
+    // 左边滑动
+    LeftSliding() {
+      const myElement = document.getElementsByClassName("item");
+
+      for (let i = 0; i < myElement.length; i++) {
+        // create a simple instance
+        // by default, it only adds horizontal recognizers
+        let mc = new Hammer(myElement[i]);
+
+        // listen to events...
+        mc.on(
+          "panleft panright",
+          // 闭包缓存myElement
+          (function(myElement) {
+            // 返回原回调函数
+            return function(ev) {
+              if (ev.type === "panleft") {
+                myElement.style.transform = "translateX(-160px)";
+              } else {
+                myElement.style.transform = "translateX(0px)";
+              }
+            };
+          })(myElement[i])
+        );
+      }
+    },
+    // 还原滑动
+    reduction() {
+      const myElement = document.getElementsByClassName("item");
+
+      for (let i = 0; i < myElement.length; i++) {
+        myElement[i].style.transform = "translateX(0px)";
+      }
+    },
     // 数量加减
     changeNumber(item, type) {
       if (type > 0) {
@@ -164,10 +207,24 @@ export default {
 
       //计算总金额
       this.calTotalMoney();
+    },
+    //点击收藏
+    hideCollect(item) {
+      console.log("点击收藏", item);
+    },
+    //点击删除
+    hideDelete(index) {
+      console.log("点击删除", index);
+      this.reduction();
     }
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    this.$nextTick(() => {
+      // DOM 现在更新了
+      this.LeftSliding();
+    });
+  },
   components: {}
 };
 </script>
@@ -211,6 +268,9 @@ section {
     font-weight: 700;
   }
   li {
+    position: relative;
+    transform: translateX(0px);
+    // 滑动 end
     display: flex;
     padding: 16px;
     padding-left: 0;
@@ -282,6 +342,43 @@ section {
           background: url(../assets/add.png) no-repeat;
           background-size: 100%;
         }
+      }
+    }
+  }
+  // <!-- 收藏删除 -->
+  .hide {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #fafafa;
+    font-size: 0;
+    white-space: nowrap;
+    .button {
+      display: inline-block;
+      width: 80px;
+      height: 100%;
+      color: #333;
+      background: #eff1f3;
+      position: relative;
+
+      & > span {
+        font-size: 14px;
+        height: 14px;
+        line-height: 14px;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 0;
+        margin-top: -7px;
+        text-align: center;
+      }
+    }
+    .action_delete {
+      background: #e4393c;
+      & > span {
+        color: #fff;
       }
     }
   }
