@@ -4,9 +4,20 @@
     <!-- 背景图片 -->
     <nav
       ref="nav"
-      :style="{ backgroundImage: image, transform: maxYScale }"
+      :style="{ backgroundImage: image, transform: maxYScale, zIndex: layer }"
     ></nav>
-    <!-- tab 滚动展示层 -->
+    <!-- Tab bar 吸顶效果 -->
+    <hgroup v-show="tabBar" class="fixed border_bottom_1px">
+      <h6
+        v-for="(item, index) in tabArr"
+        :key="index"
+        :class="{ active: item.state }"
+        @click="active(item)"
+      >
+        {{ item.title }}
+      </h6>
+    </hgroup>
+    <!-- Tab 滚动展示层 -->
     <Scroll
       class="wrapper"
       :probeType="3"
@@ -27,18 +38,19 @@
           <li>狮子座</li>
         </ul>
       </menu>
+      <!-- Tab bar -->
+      <hgroup class="border_bottom_1px">
+        <h6
+          v-for="(item, index) in tabArr"
+          :key="index"
+          :class="{ active: item.state }"
+          @click="active(item)"
+        >
+          {{ item.title }}
+        </h6>
+      </hgroup>
       <!-- 订单中心 -->
       <ol class="use_tab">
-        <hgroup class="border_bottom_1px">
-          <h6
-            v-for="(item, index) in tabArr"
-            :key="index"
-            :class="{ active: item.state }"
-            @click="active(item)"
-          >
-            {{ item.title }}
-          </h6>
-        </hgroup>
         <!-- 数据列表 -->
         <li v-for="(item, index) in 15" :key="index">
           <img src="../assets/item_title.png" alt="" />
@@ -64,6 +76,7 @@ export default {
       navHeight: 0,
       scrollY: 0,
       maxYScale: 0,
+      tabBar: false,
       tabArr: [
         { title: "待付款", state: true },
         { title: "待收货", state: false },
@@ -74,17 +87,19 @@ export default {
   props: [],
   watch: {
     scrollY(newY, oldY) {
-      // 上推效果
+      // 上推背景 减小
       /* eslint-disable-next-line */
       let maxY = Math.max(-this.navHeight + headerHeight + borderTopRadius, newY);
       this.maxYScale = `translate3d(0, ${maxY}px, 0)`;
-      // 下拉效果
+      // 下拉背景 放大
       const percent = Math.abs(newY / this.navHeight);
       if (newY > 0) {
-        // 下拉背景放大
         let scale = 1 + percent;
         this.maxYScale = `scale(${scale})`;
       }
+      // Tab 吸顶效果
+      const menuHeight = +this.menuHeight.slice(0, -2);
+      this.tabBar = newY <= -menuHeight;
     }
   },
   methods: {
@@ -101,6 +116,9 @@ export default {
     }
   },
   computed: {
+    layer() {
+      return this.tabBar ? 2 : "";
+    },
     image() {
       let img = require("../assets/my_bgc.jpg");
       return `url(${img})`;
@@ -148,7 +166,7 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.25);
   }
 }
 .wrapper {
@@ -213,33 +231,41 @@ menu {
     }
   }
 }
-.use_tab {
+hgroup {
+  display: flex;
   color: #cbcbcb;
+  padding: 10px 20px;
+  text-align: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background-color: rgb(35, 34, 38);
-  hgroup {
-    display: flex;
-    padding: 10px 20px;
-    text-align: center;
-    h6 {
-      flex: 1;
-      position: relative;
-    }
-    h6:nth-child(2) {
-      flex: 2;
-    }
-    .active::before {
-      position: absolute;
-      content: "";
-      width: 60px;
-      height: 2px;
-      bottom: -9px;
-      border-radius: 5px;
-      transform: translateX(-10%);
-      background-color: #fb7299;
-    }
+  h6 {
+    flex: 1;
+    position: relative;
   }
+  h6:nth-child(2) {
+    flex: 2;
+  }
+  .active::before {
+    position: absolute;
+    content: "";
+    width: 60px;
+    height: 2px;
+    bottom: -9px;
+    border-radius: 5px;
+    transform: translateX(-10%);
+    background-color: #fb7299;
+  }
+}
+.fixed {
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  top: 50px;
+}
+.use_tab {
+  color: #cbcbcb;
+  background-color: rgb(35, 34, 38);
   li {
     height: 50px;
     font-size: 15px;
