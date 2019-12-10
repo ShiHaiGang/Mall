@@ -37,7 +37,7 @@ export default {
       default: false
     },
     /**
-     * 是否派发滚动事件
+     * 监听滚动事件
      */
     listenScroll: {
       type: Boolean,
@@ -51,23 +51,23 @@ export default {
       default: null
     },
     /**
-     * 是否派发滚动到底部的事件，用于上拉加载
+     * 滚动结束的位置坐标
      */
-    pullup: {
+    scrollEnd: {
       type: Boolean,
       default: false
     },
     /**
-     * 是否派发顶部下拉的事件，用于下拉刷新
+     * 鼠标/手指离开位置坐标
      */
-    pulldown: {
+    touchEnd: {
       type: Boolean,
       default: false
     },
     /**
-     * 是否派发列表滚动开始的事件
+     * 滚动开始之前
      */
-    beforeScroll: {
+    beforeScrollStart: {
       type: Boolean,
       default: false
     },
@@ -102,53 +102,48 @@ export default {
           this.$emit("scroll", pos);
         });
       }
-      // 是否派发滚动到底部事件，用于上拉加载
-      if (this.pullup) {
-        this.scroll.on("scrollEnd", () => {
-          // 滚动到底部
-          if (this.scroll.y <= this.scroll.maxScrollY + 50) {
-            this.$emit("pullup");
-          }
+      // 滚动结束的位置坐标
+      if (this.scrollEnd) {
+        this.scroll.on("scrollEnd", pos => {
+          this.$emit("scrollEnd", pos);
         });
       }
-      // 是否派发顶部下拉事件，用于下拉刷新
-      if (this.pulldown) {
+      // 鼠标/手指离开位置坐标
+      if (this.touchEnd) {
         this.scroll.on("touchEnd", pos => {
-          // 下拉动作
-          if (pos.y > 50) {
-            this.$emit("pulldown");
-          }
+          // maxScrollY 最大滚动区的高度 负值
+          this.$emit("touchEnd", pos, this.scroll.maxScrollY);
         });
       }
-      // 是否派发列表滚动开始的事件
-      if (this.beforeScroll) {
+      // 滚动开始之前
+      if (this.beforeScrollStart) {
         this.scroll.on("beforeScrollStart", () => {
-          this.$emit("beforeScroll");
+          this.$emit("beforeScrollStart");
         });
       }
     },
+    // 禁用 BS
     disable() {
-      // 代理better-scroll的disable方法
       this.scroll && this.scroll.disable();
     },
+    // 启用 BS, 默认 开启。
     enable() {
-      // 代理better-scroll的enable方法
       this.scroll && this.scroll.enable();
     },
+    // 重新计算 BS，当 DOM 结构发生变化的时候务必要调用确保滚动的效果正常
     refresh() {
-      // 代理better-scroll的refresh方法
       this.scroll && this.scroll.refresh();
     },
+    // 滚动到指定的位置
     scrollTo() {
-      // 代理better-scroll的scrollTo方法
       this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments);
     },
+    // 自动触发下拉刷新
     autoPullDownRefresh() {
-      // 代理better-scroll的scrollTo方法
       this.scroll && this.scroll.autoPullDownRefresh();
     },
+    // 滚动到指定的目标元素
     scrollToElement() {
-      // 代理better-scroll的scrollToElement方法
       this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments);
     }
   },

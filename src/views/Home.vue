@@ -3,14 +3,12 @@
   <div class="home">
     <Scroll
       ref="wrapper"
-      :probeType="2"
+      :probeType="3"
       :data="feeds"
       :listenScroll="true"
       @scroll="onScroll"
-      :pullup="true"
-      @pullup="onPullup"
-      :pulldown="true"
-      @pulldown="onPulldown"
+      :touchEnd="true"
+      @touchEnd="onTouchEnd"
     >
       <!-- 头部分类 -->
       <ul>
@@ -112,12 +110,12 @@ export default {
     onScroll(pos) {
       this.scrollY = Math.abs(Math.round(pos.y)) > 500;
     },
-    onPullup() {
-      this.index();
-      console.log("pullup", "加载下一页");
-    },
-    onPulldown() {
-      console.log("pulldown");
+    onTouchEnd(pos, maxScrollY) {
+      if (pos.y >= 50) {
+        console.log("下拉刷新", pos, maxScrollY);
+      } else if (pos.y <= maxScrollY - 30) {
+        console.log("上啦刷新", pos, maxScrollY);
+      }
     },
     backTop() {
       this.$refs.wrapper.scrollTo(0, 0, 500);
