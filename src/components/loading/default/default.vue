@@ -1,8 +1,8 @@
 <!-- HTML -->
 <template>
-  <transition name="mint-indicator">
+  <transition name="loading">
     <div class="loading" v-if="visible">
-      <img src="./loading.svg" height="60" width="60" />
+      <img src="./default.svg" height="60" width="60" />
       <p class="desc">{{ text }}</p>
     </div>
   </transition>
@@ -10,7 +10,7 @@
 
 <!-- JS -->
 <script type="text/javascript">
-// ecmascript-6
+//import index from '@/index';
 
 export default {
   data: function() {
@@ -46,12 +46,12 @@ export default {
   transform: translate(-50%, -50%);
 
   .desc {
-    font-size: 15px;
+    font-size: 12px;
     line-height: 20px;
   }
 }
-.mint-indicator-enter,
-.mint-indicator-leave-active {
+.loading-enter,
+.loading-leave-active {
   opacity: 0;
   transition: opacity 0.2s linear;
 }

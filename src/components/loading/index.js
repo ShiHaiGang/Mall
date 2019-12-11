@@ -1,8 +1,10 @@
 import Vue from "vue";
-import loading from "./loading/loading.vue";
+import loading from "./default/default.vue";
+import television from "./television/television.vue";
 
 let instance;
 const Loading = Vue.extend(loading);
+const Television = Vue.extend(television);
 
 export default {
   /**
@@ -11,12 +13,18 @@ export default {
    * Loading.open(); 打开
    * Loading.close(); 关闭
    */
-  open(param) {
+  open(type, param) {
     if (!instance) {
       // 创建 instance 实例，并挂载到一个元素上。
-      instance = new Loading({
-        el: document.createElement("div")
-      });
+      if (type == "tv" || type == "television") {
+        instance = new Television({
+          el: document.createElement("div")
+        });
+      } else {
+        instance = new Loading({
+          el: document.createElement("div")
+        });
+      }
     }
     instance.text = typeof param === "undefined" ? instance.text : param;
     document.body.appendChild(instance.$el);

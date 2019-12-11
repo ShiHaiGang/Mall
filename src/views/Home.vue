@@ -86,7 +86,7 @@ export default {
   watch: {},
   methods: {
     index() {
-      Loading.open();
+      Loading.open("tv");
       JSONP.index({
         network: "",
         mobi_app: "iphone",
@@ -107,6 +107,7 @@ export default {
           }
         })
         .catch(err => {
+          Loading.close();
           console.log(err);
         });
     },
