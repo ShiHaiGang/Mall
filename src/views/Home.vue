@@ -71,6 +71,7 @@
 <script type="text/javascript">
 import Scroll from "components/scroll";
 import BackTop from "components/backTop";
+import Loading from "components/loading";
 import JSONP from "@/jsonp";
 
 export default {
@@ -85,6 +86,7 @@ export default {
   watch: {},
   methods: {
     index() {
+      Loading.open();
       JSONP.index({
         network: "",
         mobi_app: "iphone",
@@ -98,6 +100,7 @@ export default {
           const { code, data } = res.data;
           const { feeds } = data.vo;
           if (code === 0) {
+            Loading.close();
             this.pageNum++;
             this.feeds = feeds.list;
             this.total = feeds.total;

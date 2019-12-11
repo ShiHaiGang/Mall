@@ -87,6 +87,7 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias
       .set("@", resolve("src"))
+      .set("vue$", "vue/dist/vue.esm.js")
       .set("assets", resolve("src/assets"))
       .set("public", resolve("src/public"))
       .set("plugins", resolve("src/plugins"))
