@@ -129,10 +129,12 @@ export default {
           (function(myElement) {
             // 返回原回调函数
             return function(ev) {
-              if (ev.type === "panleft") {
+              if (ev.type === "panleft" && ev.deltaX <= -20) {
                 myElement.style.transform = "translateX(-160px)";
-              } else {
+                myElement.style.transitionDuration = "0.5s";
+              } else if (ev.type === "panright" && ev.deltaX >= 20) {
                 myElement.style.transform = "translateX(0px)";
+                myElement.style.transitionDuration = "0.3s";
               }
             };
           })(myElement[i])
