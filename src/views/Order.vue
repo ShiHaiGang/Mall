@@ -33,10 +33,22 @@
       <TabBar :data="tabArr" @active="active" />
       <!-- 订单中心 -->
       <ol class="use_tab">
-        <!-- 数据列表 -->
-        <li v-for="(item, index) in 15" :key="index">
-          <img src="../assets/item_title.png" alt="" />
-          全部订单
+        <li v-for="(item, index) in productList" :key="index">
+          <div class="item_header"><i>会员购</i> 已经交定金 ¥666</div>
+          <section class="item_content border_top_1px border_bottom_1px">
+            <!-- 图片信息 -->
+            <div class="item_img">
+              <img :src="item.productImg" alt="" />
+            </div>
+            <!-- 商品信息 -->
+            <div class="item_info">
+              <p class="item_name ellipsis_2">
+                {{ item.productName }}
+              </p>
+              <p class="item_spec ellipsis_1">{{ item.brandName }}</p>
+            </div>
+          </section>
+          <div class="item_footer">1 件商品 合计：¥<i>520</i></div>
         </li>
       </ol>
     </Scroll>
@@ -61,7 +73,33 @@ export default {
       maxYScale: 0,
       tabBar: false,
       tabArr: [{ title: "待付款" }, { title: "待收货" }, { title: "待评价" }],
-      currentIndex: 0
+      currentIndex: 0,
+      productList: [
+        {
+          brandName: "FILA（斐乐）", //品牌名称
+          count: "5", //购买数量
+          productId: "51", //商品编号
+          cartId: "46", //购物车编号
+          productImg:
+            "http://img10.360buyimg.com/n1/s150x150_jfs/t9310/181/142446836/274178/c7a0a21c/59a19e93N69043e8a.jpg", //商品图片
+          stock: "520", //库存
+          orgPrice: "200", //商品原始价
+          productName:
+            "2017W系列 女外套高圆圆同款秋季新款长款棒球服外套女|26733772 传奇蓝-NV 165/84A(M)", //商品名称
+          productPrice: "520", //商品单价
+          attrList: [
+            //商品sku数组
+            {
+              attrName: "颜色", //sku名称
+              attrVal: "黄色" //商品sku值
+            },
+            {
+              attrName: "尺码",
+              attrVal: "L"
+            }
+          ]
+        }
+      ] //商品信息数组
     };
   },
   props: [],
@@ -219,29 +257,56 @@ menu {
   color: #666;
   // background-color: rgb(35, 34, 38);
   li {
-    height: 50px;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
-    position: relative;
-    // background-color: #222;
-    & > img {
-      display: inline-block;
-      margin-right: 15px;
-      width: 30px;
+    // padding: 16px;
+    padding-left: 16px;
+    background: #fff;
+    margin-bottom: 16px;
+  }
+  .item_header,
+  .item_footer {
+    color: #000;
+    font-size: 13px;
+    text-align: right;
+    padding-right: 16px;
+  }
+  .item_header {
+    color: #fb7299;
+    line-height: 40px;
+    & > i {
+      float: left;
+      color: #000;
     }
-    &::after {
-      transform: rotate(45deg);
-      position: absolute;
-      display: block;
-      content: "";
-      width: 8px;
-      height: 8px;
-      top: 21px;
-      right: 15px;
-      border-top: 2px solid #cbcbcb;
-      border-right: 2px solid #cbcbcb;
+  }
+  .item_content {
+    display: flex;
+    padding: 16px;
+    padding-left: 0;
+    .item_img {
+      width: 80px;
+      height: 80px;
+      background-color: rgb(223, 85, 228);
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .item_info {
+      flex: 1;
+      margin-left: 8px;
+      position: relative;
+      .item_name {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+      .item_spec {
+        font-size: 12px;
+      }
+    }
+  }
+  .item_footer {
+    line-height: 50px;
+    & > i {
+      font-size: 15px;
     }
   }
 }
