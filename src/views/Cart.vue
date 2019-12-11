@@ -75,7 +75,7 @@
 
 <!-- JS -->
 <script type="text/javascript">
-import "@/plugins/hammer.js";
+import Hammer from "hammerjs";
 
 export default {
   data() {
@@ -115,38 +115,31 @@ export default {
   methods: {
     // 左边滑动
     LeftSliding() {
-      const myElement = document.getElementsByClassName("item");
+      const element = document.getElementsByClassName("item");
 
-      for (let i = 0; i < myElement.length; i++) {
+      for (let i = 0; i < element.length; i++) {
         // create a simple instance
         // by default, it only adds horizontal recognizers
-        let mc = new Hammer(myElement[i]);
+        let mc = new Hammer(element[i]);
 
         // listen to events...
-        mc.on(
-          "panleft panright",
-          // 闭包缓存myElement
-          (function(myElement) {
-            // 返回原回调函数
-            return function(ev) {
-              if (ev.type === "panleft" && ev.deltaX <= -20) {
-                myElement.style.transform = "translateX(-160px)";
-                myElement.style.transitionDuration = "0.5s";
-              } else if (ev.type === "panright" && ev.deltaX >= 20) {
-                myElement.style.transform = "translateX(0px)";
-                myElement.style.transitionDuration = "0.3s";
-              }
-            };
-          })(myElement[i])
-        );
+        mc.on("panleft panright", ev => {
+          if (ev.type === "panleft" && ev.deltaX <= -20) {
+            element[i].style.transform = "translateX(-160px)";
+            element[i].style.transitionDuration = "0.5s";
+          } else if (ev.type === "panright" && ev.deltaX >= 20) {
+            element[i].style.transform = "translateX(0px)";
+            element[i].style.transitionDuration = "0.3s";
+          }
+        });
       }
     },
     // 还原滑动
     reduction() {
-      const myElement = document.getElementsByClassName("item");
+      const element = document.getElementsByClassName("item");
 
-      for (let i = 0; i < myElement.length; i++) {
-        myElement[i].style.transform = "translateX(0px)";
+      for (let i = 0; i < element.length; i++) {
+        element[i].style.transform = "translateX(0px)";
       }
     },
     // 数量加减
