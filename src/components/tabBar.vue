@@ -51,14 +51,15 @@ export default {
 
 hgroup {
   display: flex;
-  color: #cbcbcb;
   padding: 10px 20px;
   text-align: center;
+  background-color: #fff;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: rgb(35, 34, 38);
+  // background-color: rgb(35, 34, 38);
   h6 {
     flex: 1;
+    color: #999;
     position: relative;
   }
   h6:nth-child(2) {
@@ -73,6 +74,9 @@ hgroup {
     border-radius: 5px;
     transform: translateX(-10%);
     background-color: #fb7299;
+  }
+  .active {
+    color: #fb7299;
   }
 }
 </style>

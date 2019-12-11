@@ -209,32 +209,6 @@ menu {
     }
   }
 }
-hgroup {
-  display: flex;
-  color: #cbcbcb;
-  padding: 10px 20px;
-  text-align: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  background-color: rgb(35, 34, 38);
-  h6 {
-    flex: 1;
-    position: relative;
-  }
-  h6:nth-child(2) {
-    flex: 2;
-  }
-  .active::before {
-    position: absolute;
-    content: "";
-    width: 60px;
-    height: 2px;
-    bottom: -9px;
-    border-radius: 5px;
-    transform: translateX(-10%);
-    background-color: #fb7299;
-  }
-}
 .fixed {
   position: absolute;
   width: 100%;
@@ -242,8 +216,8 @@ hgroup {
   top: 50px;
 }
 .use_tab {
-  color: #cbcbcb;
-  background-color: rgb(35, 34, 38);
+  color: #666;
+  // background-color: rgb(35, 34, 38);
   li {
     height: 50px;
     font-size: 15px;
