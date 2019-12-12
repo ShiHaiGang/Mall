@@ -1,6 +1,7 @@
 <!-- HTML -->
 <template>
-  <div class="category">
+  <div class="content">
+    <Header :title="''" :iconLeft="true" />
     <!-- 左边分类 -->
     <nav>
       <Scroll :data="goods">
@@ -47,6 +48,7 @@
 <!-- JS -->
 <script type="text/javascript">
 import Scroll from "components/scroll";
+import Header from "components/header.vue";
 import JSONP from "@/jsonp";
 
 export default {
@@ -130,7 +132,7 @@ export default {
     //   });
     // }, 20);
   },
-  components: { Scroll }
+  components: { Header, Scroll }
 };
 </script>
 
@@ -138,11 +140,8 @@ export default {
 <style lang="scss" scoped>
 //@import 'src/style/mixin.scss';
 
-.category {
-  width: 100%;
-  height: 100%;
+.content {
   display: flex;
-  overflow: hidden;
 }
 nav {
   width: 92px;
@@ -180,7 +179,7 @@ nav {
 menu {
   flex: 1;
   padding: 0 12px;
-  overflow: hidden;
+  overflow-y: scroll;
   background-color: #fff;
   h5 {
     font-size: 14px;

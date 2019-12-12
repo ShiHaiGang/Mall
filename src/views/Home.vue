@@ -1,6 +1,11 @@
 <!-- HTML -->
 <template>
-  <div class="home">
+  <div class="content">
+    <Header
+      :title="'会员购'"
+      :iconRight="true"
+      @iconRightClick="iconRightClick"
+    />
     <Scroll
       ref="wrapper"
       :probeType="3"
@@ -69,6 +74,7 @@
 
 <!-- JS -->
 <script type="text/javascript">
+import Header from "components/header.vue";
 import Scroll from "components/scroll";
 import BackTop from "components/backTop";
 import Loading from "components/loading";
@@ -85,6 +91,9 @@ export default {
   props: [],
   watch: {},
   methods: {
+    iconRightClick() {
+      console.log("iconRightClick点击");
+    },
     index() {
       Loading.open("tv");
       JSONP.index({
@@ -130,7 +139,7 @@ export default {
   mounted() {
     this.index();
   },
-  components: { Scroll, BackTop }
+  components: { Header, Scroll, BackTop }
 };
 </script>
 
@@ -138,16 +147,9 @@ export default {
 <style lang="scss" scoped>
 //@import 'src/style/mixin.scss';
 
-.home {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
 ul {
   display: flex;
-  height: 80px;
-  padding: 0 20px;
-  margin: 15px auto 20px;
+  padding: 20px;
   li {
     flex: 1;
     height: 80px;

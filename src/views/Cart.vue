@@ -1,6 +1,7 @@
 <!-- HTML -->
 <template>
-  <div class="cart">
+  <div class="content">
+    <Header :title="'购物车'" />
     <!-- 内容区 -->
     <section>
       <!-- 商品列表 -->
@@ -75,6 +76,7 @@
 
 <!-- JS -->
 <script type="text/javascript">
+import Header from "components/header.vue";
 import Hammer from "hammerjs";
 
 export default {
@@ -220,7 +222,7 @@ export default {
       this.LeftSliding();
     });
   },
-  components: {}
+  components: { Header }
 };
 </script>
 
@@ -241,11 +243,6 @@ export default {
   font-weight: 500;
 }
 // 公用 end
-.cart {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
 section {
   height: calc(100% - 60px);
 }

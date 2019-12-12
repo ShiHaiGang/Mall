@@ -1,13 +1,22 @@
 <!-- HTML -->
 <template>
   <header>
-    <i v-if="iconLift" class="icon"></i>
-    <div v-if="!title">
+    <i v-if="iconLeft" @click="iconLeftClick()" class="icon_left"></i>
+    <div v-if="!title" class="search">
       <i class="icon_search"></i>
       <input type="search" />
     </div>
-    {{ title ? title : "" }}
-    <i v-if="iconRight" class="icon"></i>
+    <div
+      v-else
+      :class="[
+        'title',
+        { left_indent: iconLeft && !iconRight },
+        { right_indent: !iconLeft && iconRight }
+      ]"
+    >
+      {{ title }}
+    </div>
+    <i v-if="iconRight" @click="iconRightClick()" class="icon_right"></i>
   </header>
 </template>
 
@@ -22,19 +31,26 @@ export default {
   props: {
     title: {
       type: String,
-      default: ""
+      default: " "
     },
-    iconLift: {
-      type: String,
-      default: ""
+    iconLeft: {
+      type: Boolean,
+      default: false
     },
     iconRight: {
-      type: String,
-      default: ""
+      type: Boolean,
+      default: false
     }
   },
   watch: {},
-  methods: {},
+  methods: {
+    iconLeftClick() {
+      this.$emit("iconRightClick");
+    },
+    iconRightClick() {
+      this.$emit("iconRightClick");
+    }
+  },
   computed: {},
   mounted() {},
   components: {}
@@ -55,19 +71,19 @@ header {
   font-size: 16px;
   line-height: 50px;
   background-color: #fb7299;
+  // 布局
   color: #fff;
   display: flex;
   padding: 0 10px;
-  font-weight: bold;
   align-items: center;
   justify-content: center;
   i {
     display: block;
     width: 28px;
     height: 28px;
-    background-color: yellow;
+    // background-color: yellow;
   }
-  div {
+  .search {
     flex: 1;
     height: 30px;
     margin: 0 10px;
@@ -90,5 +106,23 @@ header {
       height: 100%;
     }
   }
+  .title {
+    flex: 1;
+    text-align: center;
+  }
+  .left_indent {
+    text-indent: -28px;
+  }
+  .right_indent {
+    text-indent: 28px;
+  }
+}
+.icon_left {
+  background: url(../assets/icon_left.png) no-repeat;
+  background-size: 100%;
+}
+.icon_right {
+  background: url(../assets/icon_right.png) no-repeat;
+  background-size: 100%;
 }
 </style>

@@ -1,6 +1,7 @@
 <!-- HTML -->
 <template>
-  <div class="order">
+  <div class="content">
+    <Header class="header" :iconRight="true" />
     <!-- 背景图片 -->
     <nav
       ref="nav"
@@ -57,6 +58,7 @@
 
 <!-- JS -->
 <script type="text/javascript">
+import Header from "components/header.vue";
 import Scroll from "components/scroll";
 import TabBar from "components/tabBar";
 
@@ -149,7 +151,7 @@ export default {
       this.navHeight = this.$refs.nav.clientHeight;
     });
   },
-  components: { TabBar, Scroll }
+  components: { Header, TabBar, Scroll }
 };
 </script>
 
@@ -157,10 +159,8 @@ export default {
 <style lang="scss" scoped>
 //@import 'src/style/mixin.scss';
 
-.order {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+.content {
+  padding-top: 0;
 }
 nav {
   position: relative;

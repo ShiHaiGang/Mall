@@ -1,6 +1,6 @@
 <!-- HTML -->
 <template>
-  <div class="order">
+  <div class="content">
     <nav ref="nav" :style="{ backgroundImage: image, transform: scale }"></nav>
     <menu :style="{ height: menuHeight }">
       <div class="img_container">
@@ -113,11 +113,6 @@ export default {
 <style lang="scss" scoped>
 //@import 'src/style/mixin.scss';
 
-.order {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
 nav {
   position: relative;
   overflow: hidden;

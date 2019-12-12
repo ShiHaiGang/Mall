@@ -1,7 +1,8 @@
 <!-- HTML -->
 <template>
   <div class="wrapper" ref="wrapper">
-    <section class="content">
+    <!-- better-scroll 只处理容器（wrapper）的第一个子元素（content）的滚动，其它的元素都会被忽略。 -->
+    <section>
       <slot></slot>
     </section>
   </div>
