@@ -1,7 +1,7 @@
 <!-- HTML -->
 <template>
   <div class="content">
-    <Header class="header" :iconRight="true" />
+    <Header :title="'订单'" style="background: none" />
     <!-- 背景图片 -->
     <nav
       ref="nav"
