@@ -19,5 +19,13 @@ export default {
       url: `/category/listV2`,
       body: params
     });
+  },
+  //城市
+  city(params) {
+    return axios.get({
+      url: `/city/list`,
+      body: params,
+      city: true
+    });
   }
 };

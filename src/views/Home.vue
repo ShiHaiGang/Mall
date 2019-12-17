@@ -3,7 +3,9 @@
   <div class="content">
     <Header
       :title="'会员购'"
+      :address="true"
       :iconRight="true"
+      @addressClick="addressClick"
       @iconRightClick="iconRightClick"
     />
     <Scroll
@@ -91,6 +93,10 @@ export default {
   props: [],
   watch: {},
   methods: {
+    addressClick() {
+      this.$router.push("address");
+      // console.log("addressClick");
+    },
     iconRightClick() {
       console.log("iconRightClick点击");
     },
@@ -185,8 +191,10 @@ ol {
       background: #eee url(../assets/picture_loading.svg) no-repeat 50%;
       background-size: 40px;
       img {
-        width: 100%;
+        left: 50%;
         height: 100%;
+        position: relative;
+        transform: translateX(-50%);
       }
     }
     .info_container {

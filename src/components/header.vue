@@ -1,22 +1,24 @@
 <!-- HTML -->
 <template>
   <header>
-    <i v-if="iconLeft" @click="iconLeftClick()" class="icon_left"></i>
-    <div v-if="!title" class="search">
-      <i class="icon_search"></i>
-      <input type="search" />
+    <div ref="left" class="left">
+      <address v-if="address" @click="addressClick()">上海市</address>
+      <i v-if="iconLeft" class="icon_left" @click="iconLeftClick()"></i>
     </div>
-    <div
-      v-else
-      :class="[
-        'title',
-        { left_indent: iconLeft && !iconRight },
-        { right_indent: !iconLeft && iconRight }
-      ]"
-    >
+    <section>
+      <div
+        v-if="!title"
+        class="search"
+        :style="{ marginLeft: left, marginRight: right }"
+      >
+        <i class="icon_search"></i>
+        <input type="search" />
+      </div>
       {{ title }}
+    </section>
+    <div ref="right" class="right">
+      <i v-if="iconRight" class="icon_right" @click="iconRightClick()"></i>
     </div>
-    <i v-if="iconRight" @click="iconRightClick()" class="icon_right"></i>
   </header>
 </template>
 
@@ -26,12 +28,19 @@
 
 export default {
   data() {
-    return {};
+    return {
+      left: 0,
+      right: 0
+    };
   },
   props: {
     title: {
       type: String,
       default: " "
+    },
+    address: {
+      type: Boolean,
+      default: false
     },
     iconLeft: {
       type: Boolean,
@@ -44,6 +53,9 @@ export default {
   },
   watch: {},
   methods: {
+    addressClick() {
+      this.$emit("addressClick");
+    },
     iconLeftClick() {
       this.$emit("iconRightClick");
     },
@@ -52,7 +64,14 @@ export default {
     }
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    this.$nextTick(() => {
+      const offset = 10;
+      // 获取插槽宽度
+      this.left = `${this.$refs.left.clientWidth + offset}px`;
+      this.right = `${this.$refs.right.clientWidth + offset}px`;
+    });
+  },
   components: {}
 };
 </script>
@@ -69,52 +88,55 @@ header {
   width: 100%;
   height: 50px;
   font-size: 16px;
-  line-height: 50px;
+  overflow: hidden;
   background-color: #fb7299;
-  // 布局
   color: #fff;
+}
+.left,
+.right {
+  top: 0;
+  height: 100%;
   display: flex;
-  padding: 0 10px;
+  position: absolute;
   align-items: center;
-  justify-content: center;
-  i {
+}
+section {
+  line-height: 50px;
+  text-align: center;
+}
+.left {
+  left: 10px;
+}
+.right {
+  right: 10px;
+}
+i {
+  display: block;
+  width: 28px;
+  height: 28px;
+  // background-color: yellow;
+}
+// 搜索
+.search {
+  height: 30px;
+  margin-top: 10px;
+  position: relative;
+  padding: 0 15px 0 30px;
+  border-radius: 25px;
+  background-color: #fff;
+  .icon_search {
+    position: absolute;
+    top: (30-16)/2 + px;
+    left: 10px;
+    width: 16px;
+    height: 16px;
+    background: url(../assets/search.png) no-repeat;
+    background-size: 100%;
+  }
+  input[type="search"] {
     display: block;
-    width: 28px;
-    height: 28px;
-    // background-color: yellow;
-  }
-  .search {
-    flex: 1;
-    height: 30px;
-    margin: 0 10px;
-    position: relative;
-    padding: 0 15px 0 30px;
-    border-radius: 25px;
-    background-color: #fff;
-    .icon_search {
-      position: absolute;
-      top: (30-16)/2 + px;
-      left: 10px;
-      width: 16px;
-      height: 16px;
-      background: url(../assets/search.png) no-repeat;
-      background-size: 100%;
-    }
-    input[type="search"] {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .title {
-    flex: 1;
-    text-align: center;
-  }
-  .left_indent {
-    text-indent: -28px;
-  }
-  .right_indent {
-    text-indent: 28px;
+    width: 100%;
+    height: 100%;
   }
 }
 .icon_left {
@@ -124,5 +146,16 @@ header {
 .icon_right {
   background: url(../assets/icon_right.png) no-repeat;
   background-size: 100%;
+}
+address {
+  color: #fb7299;
+  font-size: 13px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  padding-left: 25px;
+  background: url(../assets/address.png) no-repeat;
+  background-position: 5px center;
+  background-color: #fff;
+  background-size: 20px;
 }
 </style>

@@ -43,6 +43,10 @@ module.exports = {
       "/api": {
         target: "https://mall.bilibili.com/mall-c-search/home",
         pathRewrite: { "^/api": "" }
+      },
+      "/city": {
+        target: "https://show.bilibili.com/api/ticket",
+        pathRewrite: { "^/city": "" }
       }
     },
     overlay: {
