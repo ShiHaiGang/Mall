@@ -12,11 +12,17 @@
         :style="{ marginLeft: left, marginRight: right }"
       >
         <i class="icon_search"></i>
-        <input type="search" />
+        <input
+          type="search"
+          v-model="value"
+          @focus="focus()"
+          :placeholder="placeholder"
+        />
       </div>
       {{ title }}
     </section>
     <div ref="right" class="right">
+      <span v-if="button" class="button" @click="buttonClick()">取消</span>
       <i v-if="iconRight" class="icon_right" @click="iconRightClick()"></i>
     </div>
   </header>
@@ -24,12 +30,13 @@
 
 <!-- JS -->
 <script type="text/javascript">
-//import index from '@/index';
+import UTILS from "@/utils";
 
 export default {
   data() {
     return {
       left: 0,
+      value: "",
       right: 0
     };
   },
@@ -38,7 +45,15 @@ export default {
       type: String,
       default: " "
     },
+    placeholder: {
+      type: String,
+      default: "商品、品牌、IP名"
+    },
     address: {
+      type: Boolean,
+      default: false
+    },
+    button: {
       type: Boolean,
       default: false
     },
@@ -51,8 +66,19 @@ export default {
       default: false
     }
   },
-  watch: {},
+  watch: {
+    button(val, oval) {
+      val !== oval ? this.update() : "";
+    }
+  },
   methods: {
+    focus() {
+      this.$emit("focus");
+    },
+    buttonClick() {
+      this.value = "";
+      this.$emit("buttonClick");
+    },
     addressClick() {
       this.$emit("addressClick");
     },
@@ -61,16 +87,27 @@ export default {
     },
     iconRightClick() {
       this.$emit("iconRightClick");
+    },
+    update() {
+      // 下次 DOM 更新后执行
+      this.$nextTick(() => {
+        const offset = 10;
+        // 获取插槽宽度
+        this.left = `${this.$refs.left.clientWidth + offset}px`;
+        this.right = `${this.$refs.right.clientWidth + offset}px`;
+      });
     }
   },
   computed: {},
   mounted() {
-    this.$nextTick(() => {
-      const offset = 10;
-      // 获取插槽宽度
-      this.left = `${this.$refs.left.clientWidth + offset}px`;
-      this.right = `${this.$refs.right.clientWidth + offset}px`;
-    });
+    // $watch 的回调函数 处理 截流
+    this.$watch(
+      "value",
+      UTILS.debounce(newVal => {
+        this.$emit("value", newVal);
+      }, 200)
+    );
+    this.update();
   },
   components: {}
 };
@@ -157,5 +194,8 @@ address {
   background-position: 5px center;
   background-color: #fff;
   background-size: 20px;
+}
+.button {
+  padding: 5px 10px;
 }
 </style>

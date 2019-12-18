@@ -27,5 +27,12 @@ export default {
       body: params,
       city: true
     });
+  },
+  //搜索
+  search(params) {
+    return axios.get({
+      url: `/sug`,
+      body: params
+    });
   }
 };

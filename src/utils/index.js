@@ -7,6 +7,58 @@
  */
 export default {
   /**
+   * 防抖
+   * @param {*} fn 函数
+   * @param {*} wait 延迟时间
+   * @param {*} immediate 立即执行
+   */
+  debounce(fn, wait, immediate) {
+    let timer = null;
+
+    return function() {
+      let args = arguments;
+      let context = this;
+
+      if (immediate && !timer) {
+        fn.apply(context, args);
+      }
+
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn.apply(context, args);
+      }, wait);
+    };
+  },
+
+  /**
+   * 截流
+   * @param {*} fn 函数
+   * @param {*} wait 延迟时间
+   * @param {*} immediate 立即执行
+   */
+  throttle(fn, wait, immediate) {
+    let timer = null;
+    let callNow = immediate;
+
+    return function() {
+      let context = this,
+        args = arguments;
+
+      if (callNow) {
+        fn.apply(context, args);
+        callNow = false;
+      }
+
+      if (!timer) {
+        timer = setTimeout(() => {
+          fn.apply(context, args);
+          timer = null;
+        }, wait);
+      }
+    };
+  },
+
+  /**
    * 格式化日期
    * @param {string} format 格式
    * @param {[type]} date   日期

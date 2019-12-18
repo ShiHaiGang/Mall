@@ -1,7 +1,22 @@
 <!-- HTML -->
 <template>
   <div class="content">
-    <Header :title="''" :iconLeft="true" />
+    <Header
+      :title="''"
+      :button="off"
+      @focus="focus"
+      @value="value"
+      @buttonClick="buttonClick"
+    />
+    <!-- 搜索 -->
+    <section class="search" v-show="off">
+      <h6>搜索历史 <span>清空</span></h6>
+      <ul class="history">
+        <li class="ellipsis_1" v-for="(item, index) in search" :key="index">
+          {{ item.name }}
+        </li>
+      </ul>
+    </section>
     <!-- 左边分类 -->
     <nav>
       <Scroll :data="goods">
@@ -29,7 +44,7 @@
         <ul>
           <li v-for="(items, i) in goods" :key="i" class="scroll_top_hook">
             <h5>{{ items.typeName }}</h5>
-            <section>
+            <section class="item">
               <div v-for="(item, j) in items.categoryLogicVOList" :key="j">
                 <div class="img_container">
                   <!-- <img src="../assets/1.png" alt="" /> -->
@@ -55,13 +70,38 @@ export default {
   data() {
     return {
       goods: [],
+      search: [],
       listHeight: [],
-      scrollY: 0
+      scrollY: 0,
+      off: false
     };
   },
   props: [],
   watch: {},
   methods: {
+    focus() {
+      this.off = true;
+    },
+    value(val) {
+      JSONP.search({
+        term: val,
+        type: 1,
+        platform: "h5"
+      })
+        .then(res => {
+          const { code, data } = res.data;
+          if (code === 0) {
+            this.search = data.vo;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    buttonClick() {
+      this.off = false;
+      this.search = [];
+    },
     // 左边 选择跳转到对应的位置
     selectMenu(index, event) {
       if (!event._constructed) {
@@ -143,6 +183,37 @@ export default {
 .content {
   display: flex;
 }
+.search {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 50px);
+  z-index: 5;
+  background-color: #f4f4f4;
+  h6 {
+    padding: 0 12px;
+    font-size: 12px;
+    line-height: 40px;
+    font-weight: 400;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    span {
+      // float: right;
+      padding: 4px;
+      color: #fb7299;
+      line-height: 12px;
+    }
+  }
+  .history {
+    padding: 0 12px;
+    background-color: #fff;
+    li {
+      font-size: 14px;
+      line-height: 44px;
+    }
+  }
+}
 nav {
   width: 92px;
   overflow: hidden;
@@ -186,7 +257,7 @@ menu {
     line-height: 12px;
     padding: 18px 0;
   }
-  section {
+  .item {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
