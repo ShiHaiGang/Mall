@@ -39,7 +39,7 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 | node-sass | ------ |
 | sass-loader | ------ |
 | mongoose | ------ |
-
+| ------ | ------ |
 | better-scroll | ------ |
 | hammerjs | ------ |
 
@@ -82,9 +82,15 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 # 借鉴及参考
   > [koa-nuxt-mall](https://github.com/FinGet/koa-nuxt-mall)
+
   > [Nuxt-phone](https://github.com/Sandop/Nuxt-phone)
+
   > [nuxt-maopingshou](https://github.com/MontageD/nuxt-maopingshou)
+
   > [nuxt-elm](https://github.com/EasyTuan/nuxt-elm)
+
   > [nuxt-bnhcp](https://github.com/github1586/nuxt-bnhcp)
+
   > [nuxt-ssr-demo](https://github.com/xuqiang521/nuxt-ssr-demo)
+
   > [element](https://element.eleme.cn/#/zh-CN)
