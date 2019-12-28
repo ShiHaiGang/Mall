@@ -1,0 +1,28 @@
+// 背景图片
+@mixin bg_image($url) {
+  background-image: url($url + "@2x.png");
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
+    background-image: url($url + "@3x.png")
+	}
+}
+
+// 背景图片地址和大小
+@mixin bis($url) { 
+	background-image: url($url);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+//定位上下左右居中
+@mixin abs_center {  
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+//宽高
+@mixin wh($width, $height){
+	width: $width;
+	height: $height;
+}
