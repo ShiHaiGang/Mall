@@ -29,6 +29,7 @@
           <li>上海</li>
           <li>狮子座</li>
         </ul>
+        <button @click="login()">登陆</button>
       </menu>
       <!-- Tab bar -->
       <TabBar :data="tabArr" @active="active" />
@@ -142,6 +143,9 @@ export default {
     })
   },
   methods: {
+    login() {
+      this.$router.push({ path: 'login' })
+    },
     active(index) {
       // eslint-disable-next-line no-console
       console.log(index)

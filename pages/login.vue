@@ -8,42 +8,104 @@
       <img v-else-if="naughty == 2" src="../assets/blindfold.png" />
       <img v-else src="../assets/normal.png" />
     </div>
-    <!-- 表单验证 -->
-    <section class="form_group">
+    <!-- 登陆 表单验证 -->
+    <section v-if="loginState" class="form_group">
       <label class="border_bottom_1px">
         <span>用户名</span>
         <input
           @focus="user"
           @blur="naughty = 3"
           type="text"
-          placeholder="用户名"
+          placeholder="用户名 / 手机号"
         />
       </label>
       <label>
         <span>密码</span>
         <input
-          @focus="password"
+          @focus="pass"
           @blur="naughty = 3"
           type="password"
           placeholder="密码"
         />
       </label>
     </section>
-    <div class="login">登陆</div>
-    <div class="signin">注册</div>
+    <!-- 注册 表单验证 -->
+    <section v-else class="form_group">
+      <label class="border_bottom_1px">
+        <span>昵称</span>
+        <input
+          @focus="user"
+          @blur="naughty = 3"
+          v-model="username"
+          type="text"
+          placeholder="用户名 / 手机号"
+        />
+      </label>
+      <label class="email border_bottom_1px">
+        <span>邮箱</span>
+        <input
+          @focus="user"
+          @blur="naughty = 3"
+          v-model="email"
+          type="text"
+          placeholder="请输入邮箱"
+        />
+        <em @click="verify()">发送验证码</em>
+      </label>
+      <label class="border_bottom_1px">
+        <span>验证码</span>
+        <input
+          @focus="pass"
+          @blur="naughty = 3"
+          v-model="password"
+          type="password"
+          placeholder="请输入验证码"
+        />
+      </label>
+      <label class="border_bottom_1px">
+        <span>密码</span>
+        <input
+          @focus="pass"
+          @blur="naughty = 3"
+          v-model="code"
+          type="text"
+          placeholder="密码"
+        />
+      </label>
+      <label>
+        <span>确认密码</span>
+        <input
+          @focus="pass"
+          @blur="naughty = 3"
+          v-model="cpassword"
+          type="password"
+          placeholder="请确认密码"
+        />
+      </label>
+    </section>
+    <div v-if="loginState" @click="login()" class="login">登陆</div>
+    <div v-if="loginState" @click="register()" class="register">注册</div>
+    <div v-if="!loginState" @click="agree()" class="agree">同意并注册</div>
   </div>
 </template>
 
 <!-- JS -->
 <script type="text/javascript">
 import Header from '@/components/header.vue'
+import JSONP from '@/jsonp'
 
 export default {
   components: { Header },
   props: [],
   data() {
     return {
-      naughty: 3
+      loginState: true,
+      naughty: 3,
+      username: '',
+      email: '',
+      code: '',
+      password: '',
+      cpassword: ''
     }
   },
   computed: {},
@@ -53,8 +115,41 @@ export default {
     user() {
       this.naughty = 1
     },
-    password() {
+    pass() {
       this.naughty = 2
+    },
+    login() {},
+    verify() {
+      JSONP.verify({
+        email: this.email
+      })
+        .then((res) => {
+          // eslint-disable-next-line no-console
+          console.log(res)
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log(err)
+        })
+    },
+    register() {
+      this.loginState = false
+    },
+    agree() {
+      JSONP.signup({
+        username: this.username,
+        password: this.password,
+        email: this.email,
+        code: this.code
+      })
+        .then((res) => {
+          // eslint-disable-next-line no-console
+          console.log(res)
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log(err)
+        })
     }
   }
 }
@@ -106,17 +201,29 @@ export default {
 label {
   height: 50px;
   display: block;
+  position: relative;
   padding: 13px 15px;
   span {
-    width: 30%;
+    width: 22%;
     color: #484746;
     font-size: 14px;
-    line-height: 20px;
+    line-height: 24px;
     display: inline-block;
   }
   input {
     width: 63%;
     font-size: 14px;
+  }
+}
+.email {
+  em {
+    position: absolute;
+    font-size: 12px;
+    right: 0;
+    color: #fb7299;
+    padding: 6px 10px;
+    border-radius: 30px;
+    background-color: #e7e7e7;
   }
 }
 .login {
@@ -144,7 +251,7 @@ label {
 /* 第三组颜色 */
 // background-image: linear-gradient(-45deg, #17edfe 6%, #8417f9 94%),
 // linear-gradient(to bottom, #fff3b6, #e27d2c);
-.signin {
+.register {
   width: 60px;
   float: right;
   color: #fff;
@@ -157,6 +264,21 @@ label {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   background-image: linear-gradient(-151deg, #ffc600 6%, #04e199 94%),
     linear-gradient(to bottom, #fff3b6, #e27d2c);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+.agree {
+  width: 80%;
+  margin: 0 auto;
+  color: #fff;
+  margin-top: 40px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 90px;
+  border: solid 5px transparent;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(to right, #32a8ff 6%, #00ccb4 94%),
+    linear-gradient(to bottom, #d696bc, #cd4f5d);
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }

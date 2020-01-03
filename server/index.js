@@ -1,20 +1,23 @@
+const Fs = require('fs')
+const Path = require('path')
 const Koa = require('koa')
-const consola = require('consola')
+const Consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
 /* ------------------ 自定义中间件 ------------------ */
 const Session = require('koa-generic-session')
 const BodyParser = require('koa-bodyparser')
+const mongoose = require('mongoose')
 const Redis = require('koa-redis')
 const Json = require('koa-json')
 // 用户验证
-const Passport = require('koa-passport')
-// eslint-disable-next-line no-unused-vars
-const PassportLocal = require('passport-local')
-// 服务器
-const mongoose = require('mongoose')
+const Passport = require('./utils/passport')
+const Config = require('./dbs/config')
 // 路由
-const router = require('./router')
+const router = Fs.readdirSync(Path.join(__dirname, './router'))
+// 先导入fs模块，然后用readdirSync列出文件
+// 这里可以用sync是因为启动时只运行一次，不存在性能问题:
+
 /* ------------------ 自定义中间件 end ------------------ */
 
 const app = new Koa()
@@ -45,7 +48,7 @@ app.use(Json())
 
 // 链接数据库
 mongoose.set('debug', true)
-const uri = 'mongodb://localhost:27017/api'
+const uri = Config.dbs
 mongoose.connect(uri, { useNewUrlParser: true })
 mongoose.connection.on('disconnected', () => {
   // 中断从新连接
@@ -90,8 +93,15 @@ async function start() {
     await nuxt.ready()
   }
 
-  // routes
-  app.use(router.routes(), router.allowedMethods())
+  // router file
+  router
+    // 过滤出.js文件
+    .filter((file) => file.endsWith('.js'))
+    // 处理每个js文件
+    .forEach((file) => {
+      const fileName = require(Path.join(__dirname, './router', file))
+      app.use(fileName.routes(), fileName.allowedMethods())
+    })
 
   app.use((ctx) => {
     ctx.status = 200
@@ -101,7 +111,7 @@ async function start() {
   })
 
   app.listen(port, host)
-  consola.ready({
+  Consola.ready({
     message: `Server listening on http://${host}:${port}`,
     badge: true
   })

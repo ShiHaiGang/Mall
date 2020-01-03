@@ -12,6 +12,10 @@ $ npm run install
 $ brew services start mongodb
 $ brew services stop mongodb
 
+# mongodb
+$ brew services start redis
+$ brew services stop redis
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 
