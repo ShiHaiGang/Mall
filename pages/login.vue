@@ -57,8 +57,8 @@
         <input
           @focus="pass"
           @blur="naughty = 3"
-          v-model="password"
-          type="password"
+          v-model="code"
+          type="text"
           placeholder="请输入验证码"
         />
       </label>
@@ -67,8 +67,8 @@
         <input
           @focus="pass"
           @blur="naughty = 3"
-          v-model="code"
-          type="text"
+          v-model="password"
+          type="password"
           placeholder="密码"
         />
       </label>
@@ -118,18 +118,35 @@ export default {
     pass() {
       this.naughty = 2
     },
-    login() {},
+    login() {
+      JSONP.signin({
+        username: this.username,
+        password: this.password
+      })
+        .then((res) => {
+          const { code, msg } = res.data
+          if (code === 0 && msg) {
+            this.$toast.success(msg)
+            this.$router.push({ path: '/' })
+          }
+        })
+        .catch((err) => {
+          this.$toast.error(err)
+        })
+    },
     verify() {
       JSONP.verify({
+        username: this.username,
         email: this.email
       })
         .then((res) => {
-          // eslint-disable-next-line no-console
-          console.log(res)
+          const { code, msg } = res.data
+          if (code === 0 && msg) {
+            this.$toast.success(msg)
+          }
         })
         .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.log(err)
+          this.$toast.error(err)
         })
     },
     register() {
@@ -143,12 +160,16 @@ export default {
         code: this.code
       })
         .then((res) => {
-          // eslint-disable-next-line no-console
-          console.log(res)
+          const { code, data, msg } = res.data
+          if (code === 0 && data) {
+            this.$toast.success(msg)
+            this.loginState = true
+          } else {
+            this.$toast.error(msg)
+          }
         })
         .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.log(err)
+          this.$toast.error(err)
         })
     }
   }

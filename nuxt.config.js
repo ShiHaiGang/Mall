@@ -52,7 +52,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/toast'
   ],
   /*
    ** Axios module configuration
@@ -74,6 +75,14 @@ module.exports = {
       target: 'https://show.bilibili.com/api/ticket',
       pathRewrite: { '^/city': '' }
     }
+  },
+  /**
+   * Toast
+   * See https://github.com/nuxt-community/modules/tree/master/packages/toast
+   */
+  toast: {
+    position: 'top-center',
+    duration: 2000
   },
   /*
    ** Router module configuration

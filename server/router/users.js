@@ -99,6 +99,22 @@ router.post('/verify', async (ctx, next) => {
   const { username, email } = ctx.request.body
   const saveExpire = await store.hget(`nodemailer: ${username}`, 'expire')
 
+  if (!username) {
+    ctx.body = {
+      code: -1,
+      msg: '请输入昵称'
+    }
+    return false
+  }
+
+  if (!email) {
+    ctx.body = {
+      code: -1,
+      msg: '请输入邮箱'
+    }
+    return false
+  }
+
   // 过期时间是否存在 时间超出了过期时间（限制恶意刷接口）
   if (saveExpire && new Date().getTime() - saveExpire < 0) {
     ctx.body = {
