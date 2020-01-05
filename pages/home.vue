@@ -94,8 +94,42 @@ export default {
   },
   computed: {},
   watch: {},
+  async asyncData({ app, error }) {
+    try {
+      // We can use async/await ES6 feature
+      const {
+        status,
+        data: {
+          code,
+          data: {
+            vo: {
+              feeds: { list, total }
+            }
+          }
+        }
+      } = await JSONP.index({
+        network: '',
+        mobi_app: 'iphone',
+        openEvent: 'cold',
+        build: 0,
+        pageNum: 1,
+        pageSize: 10,
+        mVersion: 7
+      })
+
+      if (status === 200 && code === 0) {
+        return {
+          pageNum: 2,
+          feeds: list,
+          total
+        }
+      }
+    } catch {
+      error({ statusCode: 500, message: '服务器开小差了~' })
+    }
+  },
   mounted() {
-    this.home()
+    // this.home()
   },
   methods: {
     addressClick() {

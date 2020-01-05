@@ -19,6 +19,11 @@ export default {
   components: { Footer },
   props: [],
   watch: {},
+  head() {
+    return {
+      title: '会员购'
+    }
+  },
   mounted() {
     if (process.browser) {
       if ('addEventListener' in document) {

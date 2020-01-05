@@ -92,14 +92,33 @@ export default {
     }
   },
   watch: {},
+  async asyncData({ app, error }) {
+    try {
+      // We can use async/await ES6 feature
+      const {
+        status,
+        data: {
+          code,
+          data: { vo }
+        }
+      } = await JSONP.category({
+        nshopId: 2233
+      })
+
+      if (status === 200 && code === 0) {
+        return {
+          goods: vo
+        }
+      }
+    } catch {
+      error({ statusCode: 500, message: '服务器开小差了~' })
+    }
+  },
   mounted() {
-    this.category()
-    // 模拟方法
-    // setTimeout(() => {
-    //   this.$nextTick(() => {
-    //     this.calculateHeight();
-    //   });
-    // }, 20);
+    // this.category()
+    this.$nextTick(() => {
+      this.calculateHeight()
+    })
   },
   methods: {
     focus() {
