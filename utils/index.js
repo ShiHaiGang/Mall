@@ -185,28 +185,28 @@ export default {
    */
   NumberFormat(number, decimals, decPoint, thousandsSep) {
     number = (number + '').replace(/[^0-9+-Ee.]/g, '')
-    const n = !isFinite(+number) ? 0 : +number
+    const finite = !isFinite(+number) ? 0 : +number
     const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
     const sep = typeof thousandsSep === 'undefined' ? ',' : thousandsSep
     const dec = typeof decPoint === 'undefined' ? '.' : decPoint
-    let s = ''
-    const toFixedFix = function(n, prec) {
+    let string = ''
+    const toFixedFix = function(finite, prec) {
       const k = 10 ** prec
-      return '' + Math.ceil(n * k) / k
+      return '' + Math.ceil(finite * k) / k
     }
 
-    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.')
-    const re = /(-?\d+)(\d{3})/
-    while (re.test(s[0])) {
-      s[0] = s[0].replace(re, '$1' + sep + '$2')
+    string = (prec ? toFixedFix(finite, prec) : '' + Math.round(finite)).split('.')
+    const reg = /(-?\d+)(\d{3})/
+    while (reg.test(string[0])) {
+      string[0] = string[0].replace(reg, '$1' + sep + '$2')
     }
 
-    if ((s[1] || '').length < prec) {
-      s[1] = s[1] || ''
-      s[1] += new Array(prec - s[1].length + 1).join('0')
+    if ((string[1] || '').length < prec) {
+      string[1] = string[1] || ''
+      string[1] += new Array(prec - string[1].length + 1).join('0')
     }
-    return s.join(dec)
-  },
+    return string.join(dec)
+  }
 
   /**
    * 金额大写转换函数
