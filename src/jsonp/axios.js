@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // const BaseUrl = "http://localhost:8080/api";
-const API = "http://192.168.0.104:8080/api" || "http://localhost:8080/api";
-const CITY = "http://192.168.0.104:8080/city" || "http://localhost:8080/city";
+const API = "http://192.168.0.105:8080/api" || "http://localhost:8080/api";
+const CITY = "http://192.168.0.105:8080/city" || "http://localhost:8080/city";
 
 export default {
   get(param = {}) {
