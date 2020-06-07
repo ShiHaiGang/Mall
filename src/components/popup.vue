@@ -70,7 +70,7 @@ export default {
   max-height: 70%;
   min-height: 30%;
   overflow-y: auto;
-  background-color: yellow;
+  background-color: #fff;
   transition: transform 0.3s;
   -webkit-overflow-scrolling: touch;
 }
