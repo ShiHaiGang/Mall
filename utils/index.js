@@ -195,7 +195,9 @@ export default {
       return '' + Math.ceil(finite * k) / k
     }
 
-    string = (prec ? toFixedFix(finite, prec) : '' + Math.round(finite)).split('.')
+    string = (prec ? toFixedFix(finite, prec) : '' + Math.round(finite)).split(
+      '.'
+    )
     const reg = /(-?\d+)(\d{3})/
     while (reg.test(string[0])) {
       string[0] = string[0].replace(reg, '$1' + sep + '$2')
@@ -206,7 +208,7 @@ export default {
       string[1] += new Array(prec - string[1].length + 1).join('0')
     }
     return string.join(dec)
-  }
+  },
 
   /**
    * 金额大写转换函数
